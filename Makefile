@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/01/25 16:08:54 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/01/29 18:38:34 by marinabuenoga    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SHELL=/bin/bash
 UNAME = $(shell uname -s)
 
 # Properties for MacOS
-CDEBUG = #-g3 -fsanitize=address
+CDEBUG = -g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
 ifeq ($(UNAME), Linux)
 	#Properties for Linux
@@ -77,7 +77,7 @@ GNL_DIR = get_next_line
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SRC = main.c
+SRC = main.c read_map.c error_exit.c
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

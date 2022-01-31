@@ -6,64 +6,68 @@
 /*   By: marinabuenogarcia <mbueno-g@student.42.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 18:27:12 by marinabuenoga     #+#    #+#             */
-/*   Updated: 2022/01/29 19:04:44 by marinabuenoga    ###   ########.fr       */
+/*   Updated: 2022/01/31 12:32:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void check_textures(char *line, t_map *m)
+void	check_textures(char *line, t_map *m)
 {
 	char	*dir;
 	char	*path;
 	int		w;
 	int		h;
-	//char	*c;
+	char	*c;
 
 	dir = ft_substr(line, 0, 2);
 	path = ft_substr(line, 3, ft_strlen(line) - 4);
 	if (ft_strncmp(dir, "NO", ft_strlen(dir)) == 0)
-		m->t->north =  mlx_xpm_file_to_image(m->mlx_ptr, path , &w, &h);
-	/*else if (ft_strncmp(dir, "SO", ft_strlen(dir)) == 0)
+		m->t->north = mlx_xpm_file_to_image(m->mlx_ptr, path , &w, &h);
+	else if (ft_strncmp(dir, "SO", ft_strlen(dir)) == 0)
 		m->t->south = mlx_xpm_file_to_image(m->mlx_ptr, path, NULL, NULL);
 	else if (ft_strncmp(dir, "WE", ft_strlen(dir)) == 0)
 		m->t->west = mlx_xpm_file_to_image(m->mlx_ptr, path, NULL, NULL);
 	else if (ft_strncmp(dir, "EA", ft_strlen(dir)) == 0)
-		m->t->east = mlx_xpm_file_to_image(m->mlx_ptr, path, NULL, NULL);*/
-	/*else
+		m->t->east = mlx_xpm_file_to_image(m->mlx_ptr, path, NULL, NULL);
+	else
 	{
-		c = ft_substr(dir, 0,1);
-		//if (ft_strcmp(c, "F", 1) == 0)
-		//	fill_colo()	
-		//else if (ft_strncmp(c, "C", 1) == 0)
+		c = ft_substr(dir, 0, 1);
+		if (ft_strncmp(c, "F", 1) == 0)
+			ft_putstr_fd("F detected!\n", 1);
+		else if (ft_strncmp(c, "C", 1) == 0)
+			ft_putstr_fd("C detected!\n", 2);
 
-	}*/
-	//free(dir);
-	//free(path);
+	}
+	free(dir);
+	free(path);
 }
 
 void	ft_create_map(int fd, t_map *m, char *line)
 {
-	int	i;
+	int		i;
+	char	*aux;
 
-	m->map = malloc(sizeof(char *) * (m->height));
-	if (!m->map)
-		printf_error("Malloc failed", NULL);
+	m->map = NULL;
 	i = 0;
 	while (1)
 	{
-		m->map[i] = NULL;
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (i <= 7)
-			check_textures(line, m);
-		m->map[i] = ft_substr(line, 0, ft_strlen(line));
+		/*if (i <= 7)
+			check_textures(line, m);*/
+		aux = ft_substr(line, 0, ft_strlen(line));
+		if (!aux)
+			cub_perror(no_memory, m->map, NULL);
+		m->map = ft_extend_matrix(m->map, aux);
+		if (!m->map)
+			cub_perror(no_memory, NULL, NULL);
 		free(line);
+		free(aux);
 		i++;
 	}
 	close(fd);
-	m->map[i] = NULL;
 }
 
 void	read_map(char *file, t_map *m)
@@ -73,7 +77,7 @@ void	read_map(char *file, t_map *m)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		printf_error("Missing file", NULL);
+		cub_perror(inv_file, NULL, file);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -85,14 +89,14 @@ void	read_map(char *file, t_map *m)
 	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		printf_error("Missing file", NULL);
+		cub_perror(inv_file, NULL, file);
 	if (m->height == 0)
-		printf_error("Empty file", NULL);
+		cub_perror(empty_file, NULL, NULL);
 	m->height -= 8;
 	ft_create_map(fd, m, NULL);
+	ft_putmatrix_fd(m->map, 0, 1);
 }
 
-/* Check possible map errors */
 void	check_map(char *file, t_map *m)
 {
 	//int	j;

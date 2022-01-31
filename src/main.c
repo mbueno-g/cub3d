@@ -6,46 +6,47 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/28 19:46:32 by marinabuenoga    ###   ########.fr       */
+/*   Updated: 2022/01/31 12:26:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void check_file(int argc, char **argv)
+static void	check_file(int argc, char **argv)
 {
-	char	*ext;
-	int		len;
+	int	fd;
 
 	if (argc != 2)
-		printf_error("Incorrect number of arguments", NULL);
-	len = ft_strlen(argv[1]);
-	ext = ft_substr(argv[1], len-4, len);
-	if (ft_strncmp(ext,".cub", ft_strlen(ext)))
-	{
-		free(ext);
-		printf_error("Incorrect file extension", NULL);
-	}
-	free(ext);
+		cub_perror(inv_argc, NULL, NULL);
+	if (!ft_strncmp(argv[1], "-h", ft_strlen(argv[1])) || \
+		!ft_strncmp(argv[1], "--help", ft_strlen(argv[1])))
+		cub_usage();
+	fd = open(argv[1], O_RDONLY);
+	close(fd);
+	if (fd < 0)
+		cub_perror(inv_file, NULL, argv[1]);
+	if (ft_strrncmp(".cub", argv[1], 4))
+		cub_perror(inv_ext, NULL, NULL);
 }
 
 /* Initialize t_map with default values */
-void	init_t_map(t_map *m)
+t_map	init_t_map(void)
 {
-	m->width = 0;
-	m->height = 0;
-	m->map = NULL;
-	m->mlx_ptr = mlx_init();
+	t_map	m;
+
+	m.width = 0;
+	m.height = 0;
+	m.map = NULL;
+	m.mlx_ptr = mlx_init();
+	return (m);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map m;
+	t_map	m;
 
-	ft_putstr_fd("Hello cub3D!\n", 1);
-	check_file(argc, argv);	
-	init_t_map(&m);
+	check_file(argc, argv);
+	m = init_t_map();
 	check_map(argv[1], &m);
-
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 12:26:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:15:56 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	check_file(int argc, char **argv)
 
 	if (argc != 2)
 		cub_perror(inv_argc, NULL, NULL);
-	if (!ft_strncmp(argv[1], "-h", ft_strlen(argv[1])) || \
-		!ft_strncmp(argv[1], "--help", ft_strlen(argv[1])))
-		cub_usage();
+	if (!ft_strncmp(argv[1], "-h", 3) || \
+		!ft_strncmp(argv[1], "--help", 7))
+		cub_usage(0);
 	fd = open(argv[1], O_RDONLY);
 	close(fd);
 	if (fd < 0)
@@ -29,8 +29,7 @@ static void	check_file(int argc, char **argv)
 		cub_perror(inv_ext, NULL, NULL);
 }
 
-/* Initialize t_map with default values */
-t_map	init_t_map(void)
+static t_map	init_t_map(void)
 {
 	t_map	m;
 

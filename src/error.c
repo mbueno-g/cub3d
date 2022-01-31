@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marinabuenogarcia <mbueno-g@student.42.fr  +#+  +:+       +#+        */
+/*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 18:12:54 by marinabuenoga     #+#    #+#             */
-/*   Updated: 2022/01/31 12:22:49 by aperez-b         ###   ########.fr       */
+/*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
+/*   Updated: 2022/01/31 13:14:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	cub_perror(t_cub_err err, char **str, char *param)
 		ft_putstr_fd("device out of memory\n", 2);
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
-		cub_usage();
+		cub_usage(1);
 	exit(1);
 }
 
-void	cub_usage(void)
+void	cub_usage(int errno)
 {
 	ft_putstr_fd("Cub3D\nA simple raycaster with MinilibX\n\n", 2);
-	ft_putstr_fd("usage: cub3d <map_file>.cub\n", 2);
-	exit(1);
+	ft_putstr_fd("usage: cub3d <map_file.cub>\n", 2);
+	exit(errno);
 }

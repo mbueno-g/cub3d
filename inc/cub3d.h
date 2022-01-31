@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 12:36:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:14:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	check_map(char *file, t_map *m);
 void	cub_perror(t_cub_err err, char **str, char *param);
 
 /* Prints usage for the cub3D program */
-void	cub_usage(void);
+void	cub_usage(int errno);
 
 #endif

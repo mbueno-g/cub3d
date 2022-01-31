@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 13:14:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:46:36 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ typedef enum e_cub_err
 	inv_ext,
 	inv_file,
 	empty_file,
-	no_memory
+	no_memory,
+	inv_color
 }				t_cub_err;
 
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int	blue;
+	short t;
+	short r;
+	short g;
+	short b;
 }				t_color;
 
 typedef struct s_texture
@@ -43,8 +45,6 @@ typedef struct s_texture
 	void	*south;
 	void	*west;
 	void	*east;
-	t_color	*floor;
-	t_color	*ceiling;
 }				t_texture;
 
 typedef struct s_map
@@ -53,7 +53,9 @@ typedef struct s_map
 	int			height;
 	int			width;
 	void		*mlx_ptr;
-	t_texture	*t;
+	int			hex_floor;
+	int			hex_ceiling;
+	t_texture	t;
 }				t_map;
 
 /* Check possible map errors */
@@ -64,5 +66,11 @@ void	cub_perror(t_cub_err err, char **str, char *param);
 
 /* Prints usage for the cub3D program */
 void	cub_usage(int errno);
+
+/* Atoi for colors */
+int		cub_atoi(const char *nptr, short *nbr);
+
+/* Fill color int */
+void	get_cf_color(char **dir, t_map *m);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/01/31 13:10:55 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/01/31 17:03:13 by mbueno-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ GNL_DIR = get_next_line
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SRC = main.c read_map.c error.c
+SRC = main.c read_map.c error.c color.c utils.c
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

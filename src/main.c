@@ -6,11 +6,12 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 20:11:59 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/01 11:18:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include <mlx.h>
 
 static void	check_file(int argc, char **argv)
 {
@@ -47,5 +48,6 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	m = init_t_map();
 	check_map(argv[1], &m);
+	cub_perror(end, &m, NULL);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/01/31 17:03:13 by mbueno-g         ###   ########.fr        #
+#    Updated: 2022/02/01 11:08:50 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,13 @@ UNAME = $(shell uname -s)
 # Properties for MacOS
 CDEBUG = -g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
+END = end_mac.c
 ifeq ($(UNAME), Linux)
-	#Properties for Linux
-	LEAKS = valgrind --leak-check=full --show-leak-kinds=all -s -q 
+	# Properties for Linux
+	LEAKS = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s -q 
 	LMLX = -lmlx -lXext -lX11
-	CDEBUG =
+	END = end_linux.c
+	CDEBUG = -g3
 
 	# Key Codes for Linux
 	ESC = KEY_ESC=65307
@@ -77,7 +79,7 @@ GNL_DIR = get_next_line
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SRC = main.c read_map.c error.c color.c utils.c
+SRC = main.c map.c error.c color.c utils.c $(END)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

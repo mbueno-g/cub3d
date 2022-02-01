@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 17:46:36 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/01 11:23:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef enum e_cub_err
 {
+	end,
 	inv_argc,
 	inv_ext,
 	inv_file,
@@ -33,36 +34,37 @@ typedef enum e_cub_err
 
 typedef struct s_color
 {
-	short t;
-	short r;
-	short g;
-	short b;
+	short	t;
+	short	r;
+	short	g;
+	short	b;
 }				t_color;
 
-typedef struct s_texture
+typedef struct s_tex
 {
 	void	*north;
 	void	*south;
 	void	*west;
 	void	*east;
-}				t_texture;
+}				t_tex;
 
 typedef struct s_map
 {
-	char		**map;
-	int			height;
-	int			width;
-	void		*mlx_ptr;
-	int			hex_floor;
-	int			hex_ceiling;
-	t_texture	t;
+	int		fd;
+	char	**map;
+	int		height;
+	int		width;
+	void	*mlx_ptr;
+	int		hex_floor;
+	int		hex_ceiling;
+	t_tex	tex;
 }				t_map;
 
 /* Check possible map errors */
 void	check_map(char *file, t_map *m);
 
-/* Prints appropriate error message and exits */
-void	cub_perror(t_cub_err err, char **str, char *param);
+/* Prints appropriate error message and exits, freeing everything */
+void	cub_perror(t_cub_err err, t_map *m, char *param);
 
 /* Prints usage for the cub3D program */
 void	cub_usage(int errno);
@@ -72,5 +74,8 @@ int		cub_atoi(const char *nptr, short *nbr);
 
 /* Fill color int */
 void	get_cf_color(char **dir, t_map *m);
+
+/* Frees all necessary things before exiting */
+void	cub_end(t_map *m);
 
 #endif

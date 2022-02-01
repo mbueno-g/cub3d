@@ -6,16 +6,15 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/01/31 17:39:47 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/01 11:07:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	cub_perror(t_cub_err err, char **str, char *param)
+void	cub_perror(t_cub_err err, t_map *m, char *param)
 {
-	if (str)
-		ft_free_matrix(&str);
+	cub_end(m);
 	ft_putstr_fd("cub3d: ", 2);
 	if (err == inv_argc)
 		ft_putstr_fd("invalid number of arguments\n", 2);
@@ -32,6 +31,8 @@ void	cub_perror(t_cub_err err, char **str, char *param)
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
 		cub_usage(1);
+	if (err == end)
+		exit(0);
 	exit(1);
 }
 

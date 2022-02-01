@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/01 12:05:55 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:20:16 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	read_map(char *file, t_map *m)
 	ft_putstr_fd("-------------\n", 1);
 	if (!i)
 		cub_perror(empty_file, m, NULL);
+	m->height = ft_matrixlen(m->map);
 	ft_putmatrix_fd(m->map, 1, 1);
 }
 
@@ -70,20 +71,24 @@ void	check_map(char *file, t_map *m)
 {
 	int	j;
 	int	i;
+	int	width;
 
 	read_map(file, m);
 	j = 0;
-	while (j < m->height - 1)
+	while (j < m->height)
 	{
+		width = ft_strlen(m->map[j]);
 		i = 0;
-		while (m->map[i][j] == ' ')
+		if (ft_strncmp(m->map[j], "", 1) == 0)
+			cub_perror(inv_map, m, NULL);	
+		while (ft_isspace(m->map[j][i]) && i < width)
 			i++;
-		if ((ft_strlen(m->map[j + 1]) != ft_strlen(m->map[j]) && \
-			ft_strchr(m->map[j + 1], '\n')) || (ft_strlen(m->map[j + 1]) != \
-			ft_strlen(m->map[j]) - 1 && !ft_strchr(m->map[j + 1], '\n')))
-			cub_perror(inv_ext, m, NULL);
+		if ((j == 0 || j == m->height - 1) && ft_strchr(m->map[j], '0'))
+			cub_perror(inv_wall, m, NULL);
+		else if (m->map[j][0] == '0' || m->map[j][width - 1] == '0')
+			cub_perror(inv_wall, m, NULL);
 		j++;
 	}
-	if (m->height < 3 && m->width < 3)
-		cub_perror(inv_ext, m, NULL);
+	if (!j)
+		cub_perror(inv_map, m, NULL);
 }

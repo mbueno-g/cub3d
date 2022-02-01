@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/01 11:07:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:13:09 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	cub_perror(t_cub_err err, t_map *m, char *param)
 		ft_putstr_fd("device out of memory\n", 2);
 	if (err == inv_color)
 		ft_putstr_fd("invalid color: ", 2);
+	if (err == inv_wall)
+		ft_putstr_fd("map not surrounded by walls\n", 2);
+	if (err == inv_map)
+		ft_putstr_fd("invalid map\n", 2);
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
 		cub_usage(1);

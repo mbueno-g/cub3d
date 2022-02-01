@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/01 11:23:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:13:19 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef enum e_cub_err
 	inv_file,
 	empty_file,
 	no_memory,
-	inv_color
+	inv_color,
+	inv_wall,
+	inv_map
 }				t_cub_err;
 
 typedef struct s_color

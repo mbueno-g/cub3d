@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:27:26 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/01/31 20:11:56 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/01 10:36:01 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,42 +56,25 @@ void	read_map(char *file, t_map *m)
 			break ;
 		if (ft_strncmp(aux, "\n", 2))
 			line = ft_strtrim(aux,"\n");
-		if (i <= 6 && ++i)
+		if (ft_strncmp(aux, "\n", 2) && i <= 6 && ++i)
 			check_textures(line, m);
 		else
 		{
-			if (ft_strncmp(aux, "\n", 2) || !ft_matrixlen(m->map))
-			{
-				m->map = ft_extend_matrix(m->map, line);
-				if (!m->map)
-				cub_perror(no_memory, NULL, NULL);
-			}
-		}
-
-		/*if (ft_strncmp(aux, "\n", 2) && ++i)
-		{
-			line = ft_strtrim(aux,"\n");
-			free(aux);
-			if (i <= 6)
-				check_textures(line, m);
-			else
+			if (ft_strncmp(aux, "\n", 2) != 0 || (ft_strncmp(aux, "\n", 2) == 0 \
+				&& m->height > 0))
 			{
 				m->map = ft_extend_matrix(m->map, line);
 				if (!m->map)
 					cub_perror(no_memory, NULL, NULL);
+				m->height++;
 			}
 		}
-		else if(i >= 7)
-		{	
-			m->map = ft_extend_matrix(m->map, line);
-			if (!m->map)
-				cub_perror(no_memory, NULL, NULL);
-		}*/
 		free(line);
 	}
 	close(fd);
 	if (ft_matrixlen(m->map) == 0)
 		cub_perror(empty_file, NULL, NULL);
+	printf("Aqui empieza el mapa\n");
 	ft_putmatrix_fd(m->map, 1, 1);
 }
 

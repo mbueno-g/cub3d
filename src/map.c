@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/02 23:21:40 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:24:57 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	check_characters(int j, t_map *m)
 		else if (!ft_strchr("01", m->map[j][i]))
 			cub_perror(inv_charac, m, NULL);
 	}
+	if (j == m->height - 1 && m->dir == 'M')
+		cub_perror(inv_charac, m, NULL);
 }
 
 void	check_map(char *file, t_map *m)

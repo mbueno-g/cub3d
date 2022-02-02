@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/01 23:13:09 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:16:16 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,15 @@ void	cub_perror(t_cub_err err, t_map *m, char *param)
 {
 	cub_end(m);
 	ft_putstr_fd("cub3d: ", 2);
-	if (err == inv_argc)
-		ft_putstr_fd("invalid number of arguments\n", 2);
-	if (err == inv_ext)
-		ft_putstr_fd("file must be of .cub type\n", 2);
-	if (err == inv_file)
-		ft_putstr_fd("error opening file: ", 2);
-	if (err == empty_file)
-		ft_putstr_fd("file is empty\n", 2);
-	if (err == no_memory)
-		ft_putstr_fd("device out of memory\n", 2);
-	if (err == inv_color)
-		ft_putstr_fd("invalid color: ", 2);
-	if (err == inv_wall)
-		ft_putstr_fd("map not surrounded by walls\n", 2);
-	if (err == inv_map)
-		ft_putstr_fd("invalid map\n", 2);
+	write(2, "invalid number of arguments\n", 28 * (err == inv_argc));
+	write(2, "file must be of .cub type\n", 26 * (err == inv_ext));
+	write(2, "error opening file: ", 20 * (err == inv_file));
+	write(2, "file is empty\n", 14 * (err == empty_file));
+	write(2, "devide out of memory\n", 21 * (err == no_memory));
+	write(2, "invalid color: ", 15 * (err == inv_color));
+	write(2, "map not surrounded by walls\n", 28 * (err == inv_wall));
+	write(2, "invalid map\n", 12 * (err == inv_map));
+	write(2, "invalid character\n", 18 * (err == inv_charac));
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
 		cub_usage(1);

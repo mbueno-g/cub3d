@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/01 23:13:19 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:04:29 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef enum e_cub_err
 	no_memory,
 	inv_color,
 	inv_wall,
-	inv_map
+	inv_map,
+	inv_charac
 }				t_cub_err;
 
 typedef struct s_color
@@ -60,6 +61,7 @@ typedef struct s_map
 	int		hex_floor;
 	int		hex_ceiling;
 	t_tex	tex;
+	char	dir;
 }				t_map;
 
 /* Check possible map errors */

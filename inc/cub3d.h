@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/02 23:04:29 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:15:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef enum e_cub_err
 	inv_color,
 	inv_wall,
 	inv_map,
-	inv_charac
+	inv_charac,
+	no_player,
+	inv_tex
 }				t_cub_err;
 
 typedef struct s_color
@@ -68,7 +70,7 @@ typedef struct s_map
 void	check_map(char *file, t_map *m);
 
 /* Prints appropriate error message and exits, freeing everything */
-void	cub_perror(t_cub_err err, t_map *m, char *param);
+int		cub_perror(t_cub_err err, t_map *m, char *param, int c);
 
 /* Prints usage for the cub3D program */
 void	cub_usage(int errno);

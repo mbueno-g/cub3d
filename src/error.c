@@ -6,16 +6,18 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/02 23:16:16 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:18:43 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	cub_perror(t_cub_err err, t_map *m, char *param)
+int	cub_perror(t_cub_err err, t_map *m, char *param, int c)
 {
+	if (!c)
+		return (0);
 	cub_end(m);
-	ft_putstr_fd("cub3d: ", 2);
+	write(2, "cub3d: ", 7 * (err != end));
 	write(2, "invalid number of arguments\n", 28 * (err == inv_argc));
 	write(2, "file must be of .cub type\n", 26 * (err == inv_ext));
 	write(2, "error opening file: ", 20 * (err == inv_file));
@@ -25,12 +27,15 @@ void	cub_perror(t_cub_err err, t_map *m, char *param)
 	write(2, "map not surrounded by walls\n", 28 * (err == inv_wall));
 	write(2, "invalid map\n", 12 * (err == inv_map));
 	write(2, "invalid character\n", 18 * (err == inv_charac));
+	write(2, "invalid texture file\n", 21 * (err == inv_tex));
+	write(2, "missing player\n", 15 * (err == no_player));
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
 		cub_usage(1);
 	if (err == end)
 		exit(0);
 	exit(1);
+	return (1);
 }
 
 void	cub_usage(int errno)

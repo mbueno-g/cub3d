@@ -6,11 +6,12 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/02 23:24:57 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:19:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include <stdio.h>
 
 void	check_textures(char *trim, t_map *m)
 {
@@ -22,7 +23,7 @@ void	check_textures(char *trim, t_map *m)
 	if (!dir)
 	{
 		free(trim);
-		cub_perror(no_memory, m, NULL);
+		cub_perror(no_memory, m, NULL, 1);
 	}
 	else if (!ft_strncmp(dir[0], "NO", 3))
 		m->tex.north = mlx_xpm_file_to_image(m->mlx_ptr, dir[1], &w, &w);
@@ -45,8 +46,7 @@ void	read_map(char *file, t_map *m)
 
 	i = 0;
 	m->fd = open(file, O_RDONLY);
-	if (m->fd < 0)
-		cub_perror(inv_file, m, file);
+	cub_perror(inv_file, m, file, m->fd < 0);
 	while (1)
 	{
 		line = get_next_line(m->fd);
@@ -60,11 +60,10 @@ void	read_map(char *file, t_map *m)
 			m->map = ft_extend_matrix(m->map, aux);
 		free(aux);
 	}
-	ft_putstr_fd("-------------\n", 1);
-	if (!i)
-		cub_perror(empty_file, m, NULL);
+	cub_perror(empty_file, m, NULL, !i);
 	m->height = ft_matrixlen(m->map);
-	ft_putmatrix_fd(m->map, 1, 1);
+	if (!m->tex.north || !m->tex.south || !m->tex.east || !m->tex.west)
+		cub_perror(inv_tex, m, NULL, 1);
 }
 
 void	check_characters(int j, t_map *m)
@@ -74,38 +73,38 @@ void	check_characters(int j, t_map *m)
 	i = -1;
 	while (++i < (int) ft_strlen(m->map[j]))
 	{
-		if (ft_strchr("NSWE", m->map[j][i]) && m->map[j][i] == 'M')
+		if (ft_strchr("NSWE", m->map[j][i]) && m->dir == 'M')
 			m->dir = m->map[j][i];
 		else if (!ft_strchr("01", m->map[j][i]))
-			cub_perror(inv_charac, m, NULL);
+			cub_perror(inv_charac, m, NULL, 1);
 	}
 	if (j == m->height - 1 && m->dir == 'M')
-		cub_perror(inv_charac, m, NULL);
+		cub_perror(no_player, m, NULL, 1);
 }
 
 void	check_map(char *file, t_map *m)
 {
 	int	j;
 	int	i;
-	int	width;
+	int	w;
 
 	read_map(file, m);
 	j = 0;
 	while (j < m->height)
 	{
-		width = ft_strlen(m->map[j]);
+		w = ft_strlen(m->map[j]);
 		i = 0;
 		if (ft_strncmp(m->map[j], "", 1) == 0)
-			cub_perror(inv_map, m, NULL);
-		while (ft_isspace(m->map[j][i]) && i < width)
+			cub_perror(inv_map, m, NULL, 1);
+		while (ft_isspace(m->map[j][i]) && i < w)
 			i++;
-		if ((j == 0 || j == m->height - 1) && ft_strchr(m->map[j], '0'))
-			cub_perror(inv_wall, m, NULL);
-		else if (m->map[j][0] == '0' || m->map[j][width - 1] == '0')
-			cub_perror(inv_wall, m, NULL);
+		if ((j == 0 || j == m->height - 1) && w - i - \
+			ft_countchar(m->map[j], '1'))
+			cub_perror(inv_wall, m, NULL, 1);
+		else if (m->map[j][i] != '1' || m->map[j][w - 1] != '1')
+			cub_perror(inv_wall, m, NULL, 1);
 		check_characters(j, m);
 		j++;
 	}
-	if (!j)
-		cub_perror(inv_map, m, NULL);
+	cub_perror(inv_map, m, NULL, !j);
 }

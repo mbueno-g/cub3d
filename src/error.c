@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/03 16:18:43 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:48:52 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	cub_perror(t_cub_err err, t_map *m, char *param, int c)
 	write(2, "invalid map\n", 12 * (err == inv_map));
 	write(2, "invalid character\n", 18 * (err == inv_charac));
 	write(2, "invalid texture file\n", 21 * (err == inv_tex));
-	write(2, "missing player\n", 15 * (err == no_player));
+	write(2, "invalid number of players\n", 26 * (err == inv_player));
 	ft_putendl_fd(param, 2);
 	if (err == inv_argc && ft_putchar_fd('\n', 2))
 		cub_usage(1);

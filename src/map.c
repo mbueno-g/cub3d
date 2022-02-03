@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/03 16:19:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:50:14 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,18 @@ void	check_characters(int j, t_map *m)
 	i = -1;
 	while (++i < (int) ft_strlen(m->map[j]))
 	{
-		if (ft_strchr("NSWE", m->map[j][i]) && m->dir == 'M')
-			m->dir = m->map[j][i];
+		if (m->pl.dir == 'M' && ft_strchr("NSWE", m->map[j][i]))
+		{
+			m->pl.dir = m->map[j][i];
+			m->pl.v = ft_newvector(j, i);
+		}
+		else if (m->pl.dir != 'M' && ft_strchr("NSWE", m->map[j][i]))
+			cub_perror(inv_player, m, NULL, 1);
 		else if (!ft_strchr("01", m->map[j][i]))
 			cub_perror(inv_charac, m, NULL, 1);
 	}
-	if (j == m->height - 1 && m->dir == 'M')
-		cub_perror(no_player, m, NULL, 1);
+	if (j == m->height - 1 && m->pl.dir == 'M')
+		cub_perror(inv_player, m, NULL, 1);
 }
 
 void	check_map(char *file, t_map *m)

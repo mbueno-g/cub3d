@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:43:33 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/03 16:17:39 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:04:12 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	get_cf_color(char **dir, t_map *m)
 	if (c[0] || c[1] || c[2])
 		cub_perror(inv_color, m, dir[1], 1);
 	if (f)
-		m->hex_floor = create_trgb(aux);
+		m->tex.hex_floor = create_trgb(aux);
 	else
-		m->hex_ceiling = create_trgb(aux);
+		m->tex.hex_ceiling = create_trgb(aux);
 }

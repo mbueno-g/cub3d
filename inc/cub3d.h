@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/03 16:15:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:17:35 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../get_next_line/get_next_line.h"
 
 # include <mlx.h>
+# include "my_mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -33,7 +34,7 @@ typedef enum e_cub_err
 	inv_wall,
 	inv_map,
 	inv_charac,
-	no_player,
+	inv_player,
 	inv_tex
 }				t_cub_err;
 
@@ -51,19 +52,26 @@ typedef struct s_tex
 	void	*south;
 	void	*west;
 	void	*east;
+	int		hex_floor;
+	int		hex_ceiling;
 }				t_tex;
+
+typedef struct s_player
+{
+	t_vector	v;
+	char		dir;
+}				t_player;
 
 typedef struct s_map
 {
-	int		fd;
-	char	**map;
-	int		height;
-	int		width;
-	void	*mlx_ptr;
-	int		hex_floor;
-	int		hex_ceiling;
-	t_tex	tex;
-	char	dir;
+	int			fd;
+	char		**map;
+	int			height;
+	int			width;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_tex		tex;
+	t_player	pl;
 }				t_map;
 
 /* Check possible map errors */
@@ -83,5 +91,11 @@ void	get_cf_color(char **dir, t_map *m);
 
 /* Frees all necessary things before exiting */
 void	cub_end(t_map *m);
+
+/* Initialize game */
+void	game_init(t_map *m);
+
+/* Draw game */
+void	draw_game(t_map *m);
 
 #endif

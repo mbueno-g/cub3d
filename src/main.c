@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/03 16:16:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/03 19:04:14 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ static t_map	init_t_map(void)
 	m.width = 0;
 	m.height = 0;
 	m.map = NULL;
-	m.dir = 'M';
+	m.pl.dir = 'M';
 	m.mlx_ptr = NULL;
 	m.mlx_ptr = mlx_init();
 	m.tex.north = NULL;
 	m.tex.south = NULL;
 	m.tex.east = NULL;
 	m.tex.west = NULL;
+	m.pl.v.x = -1;
+	m.pl.v.y = -1;
 	return (m);
 }
 
@@ -52,6 +54,8 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	m = init_t_map();
 	check_map(argv[1], &m);
+	//game_init(&m);
+	draw_game(&m);
 	cub_perror(end, &m, NULL, 1);
 	return (0);
 }

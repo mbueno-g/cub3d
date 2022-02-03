@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   my_mlx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/03 18:07:27 by mbueno-g         ###   ########.fr       */
+/*   Created: 2022/02/03 18:13:10 by mbueno-g          #+#    #+#             */
+/*   Updated: 2022/02/03 19:04:10 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	cub_atoi(const char *nptr, short *nbr)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
-	*nbr = 0;
-	if (!ft_isdigit(*nptr))
-		return (-1);
-	while (ft_isdigit(*nptr))
-	{
-		*nbr = 10 * (*nbr) + (*nptr - '0');
-		if (*nbr < 0 || *nbr > 255)
-			return (-1);
-		nptr++;
-	}
-	if (*nptr)
-		return (-1);
-	return (0);
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+unsigned int	my_mlx_pixel_get(t_img *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+	return (*(unsigned int *)dst);
 }

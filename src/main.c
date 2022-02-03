@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/02 23:01:00 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:40:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ static t_map	init_t_map(void)
 	m.width = 0;
 	m.height = 0;
 	m.map = NULL;
-	m.mlx_ptr = mlx_init();
 	m.dir = 'M';
+	m.mlx_ptr = NULL;
+	m.mlx_ptr = mlx_init();
+	m.tex.north = NULL;
+	m.tex.south = NULL;
+	m.tex.east = NULL;
+	m.tex.west = NULL;
 	return (m);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/03 18:07:27 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/06 21:20:31 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,9 @@ int	cub_atoi(const char *nptr, short *nbr)
 	if (*nptr)
 		return (-1);
 	return (0);
+}
+
+float	degree_to_radians(int degree)
+{
+	return (degree * M_PI / 180);
 }

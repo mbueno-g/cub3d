@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/03 18:17:35 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/06 21:17:46 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "my_mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 
 typedef enum e_cub_err
 {
@@ -74,6 +75,21 @@ typedef struct s_map
 	t_player	pl;
 }				t_map;
 
+typedef struct s_data
+{
+	int		angle;
+	int		hfov;
+	int		width;
+	int		height;
+	int		ray_angle;
+	float	incre_angle;
+	float	x;
+	float	y;
+	int		precision;
+	t_img	i;
+}				t_data;
+
+
 /* Check possible map errors */
 void	check_map(char *file, t_map *m);
 
@@ -97,5 +113,8 @@ void	game_init(t_map *m);
 
 /* Draw game */
 void	draw_game(t_map *m);
+
+/* Converts degrees to radius */
+float	degree_to_radians(int degree);
 
 #endif

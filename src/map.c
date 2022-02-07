@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 12:02:47 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:21:10 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	read_map(char *file, t_game *g)
 	}
 	cub_perror(empty_file, g, NULL, !i);
 	g->height = ft_matrixlen(g->map);
-	if (!g->tex.north || !g->tex.south || !g->tex.east || !g->tex.west)
+	if (!g->tex.north || !g->tex.south || !g->tex.east || !g->tex.west \
+		|| g->tex.hex_floor == -1 || g->tex.hex_ceiling == -1)
 		cub_perror(inv_tex, g, NULL, 1);
 }
 
@@ -75,7 +76,8 @@ void	check_characters(int j, t_game *g)
 		if (g->pl.dir == 'M' && ft_strchr("NSWE", g->map[j][i]))
 		{
 			g->pl.dir = g->map[j][i];
-			g->pl.pos = ft_newvector(j, i);
+			g->pl.x = (float) j;
+			g->pl.y = (float) i;;
 		}
 		else if (g->pl.dir != 'M' && ft_strchr("NSWE", g->map[j][i]))
 			cub_perror(inv_player, g, NULL, 1);

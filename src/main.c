@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 12:50:26 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:19:21 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static t_game	cub_init(void)
 	g.tex.south = NULL;
 	g.tex.east = NULL;
 	g.tex.west = NULL;
-	g.pl.pos.x = -1;
-	g.pl.pos.y = -1;
+	g.tex.hex_floor = -1;
+	g.tex.hex_ceiling = -1;
+	g.pl.x = -1;
+	g.pl.y = -1;
 	return (g);
 }
 

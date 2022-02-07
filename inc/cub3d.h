@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 12:38:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 16:43:06 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ typedef struct s_tex
 /* Struct to store various attributes of our player */
 typedef struct s_player
 {
-	t_vector	pos;
-	char		dir;
+	float	x;
+	float	y;
+	char	dir;
 }				t_player;
 
 /* Struct to store all ray-casting-related data */
@@ -73,11 +74,10 @@ typedef struct s_ray
 	float	x;
 	float	y;
 	float	incre_angle;
-	int		angle;
-	int		hfov;
+	float	angle;
+	float	hfov;
 	int		width;
 	int		height;
-	int		ray_angle;
 	int		precision;
 }				t_ray;
 
@@ -121,6 +121,6 @@ void	game_init(t_game *g);
 void	draw_game(t_game *g);
 
 /* Converts degrees to radians */
-float	degree_to_radians(int degree);
+float	degree_to_radians(float degree);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:43:33 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 12:08:46 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 16:00:36 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	get_cf_color(char **dir, t_game *g)
 	int		c[3];
 	t_color	aux;
 
-	aux.t = 255;
+	aux.t = 0;
 	f = !ft_strncmp(dir[0], "F", 2);
 	fc = ft_split(dir[1], ',');
 	cub_perror(inv_color, g, dir[0], !fc);

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 12:50:16 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:31:10 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	init_t_data(t_ray *ray, t_game *g)
 {
-	ray->angle = 90;
+	ray->angle = 270;
 	ray->hfov = 30;
 	ray->width = 640;
 	ray->height = 480;
-	ray->incre_angle = ray->angle / ray->width;
+	ray->incre_angle = 2 * ray->hfov / ray->width;
 	ray->precision = 64;
-	ray->x = g->pl.pos.y;
-	ray->y = g->pl.pos.x;
+	ray->x = g->pl.y + 3.5;
+	ray->y = g->pl.x + 3.5;
 }
 
 float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
@@ -34,8 +34,8 @@ float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
 
 	ray_cos = cos(degree_to_radians(ray_angle)) / ray.precision;
 	ray_sen = sin(degree_to_radians(ray_angle)) / ray.precision;
-	x = g->pl.pos.y;
-	y = g->pl.pos.x;
+	x = g->pl.y;
+	y = g->pl.x;
 	while (g->map[(int)y][(int)x] != '1')
 	{
 		x += ray_sen;
@@ -82,7 +82,7 @@ void	cub_raycast(t_game *g)
 	{
 		dist = distance_to_wall(g, ray, ray_angle);
 		cub_draw(g, ray, ray_count, dist);
-		ray_angle += 0.09375;
+		ray_angle += ray.incre_angle;
 	}
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
 }

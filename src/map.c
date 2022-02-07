@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 18:21:10 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:50:44 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	check_characters(int j, t_game *g)
 		if (g->pl.dir == 'M' && ft_strchr("NSWE", g->map[j][i]))
 		{
 			g->pl.dir = g->map[j][i];
-			g->pl.x = (float) j;
-			g->pl.y = (float) i;;
+			g->pl.x = (float) i;
+			g->pl.y = (float) j;
 		}
 		else if (g->pl.dir != 'M' && ft_strchr("NSWE", g->map[j][i]))
 			cub_perror(inv_player, g, NULL, 1);

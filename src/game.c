@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 18:31:10 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:59:09 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	init_t_data(t_ray *ray, t_game *g)
 {
-	ray->angle = 270;
+	ray->angle = 45;
 	ray->hfov = 30;
 	ray->width = 640;
 	ray->height = 480;
 	ray->incre_angle = 2 * ray->hfov / ray->width;
-	ray->precision = 64;
-	ray->x = g->pl.y + 3.5;
-	ray->y = g->pl.x + 3.5;
+	ray->precision = 500;
+	ray->x = g->pl.y;
+	ray->y = g->pl.x;
 }
 
 float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
@@ -34,14 +34,20 @@ float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
 
 	ray_cos = cos(degree_to_radians(ray_angle)) / ray.precision;
 	ray_sen = sin(degree_to_radians(ray_angle)) / ray.precision;
-	x = g->pl.y;
-	y = g->pl.x;
+	x = g->pl.x;
+	y = g->pl.y;
+	printf("s %f, %f\n", ray_cos, ray_sen);
 	while (g->map[(int)y][(int)x] != '1')
 	{
-		x += ray_sen;
-		y += ray_cos;
+		x += ray_cos;
+		y += ray_sen;
+		if (g->map[(int)y][(int)x] == '1')
+			my_mlx_pixel_put(&g->win_img, y * ray.height /g->height, x * ray.width / 29, 0x00FF0000);
+		else
+			my_mlx_pixel_put(&g->win_img, y * ray.height /g->height, x * ray.width / 29, 0x00FFFFFF);
 	}
 	dist = sqrt((x - ray.x) * (x - ray.x) + (y - ray.y) * (y - ray.y));
+	dist = dist * cos(degree_to_radians(ray_angle - ray.angle));
 	return (dist);
 }
 
@@ -81,7 +87,7 @@ void	cub_raycast(t_game *g)
 	while (++ray_count < ray.width)
 	{
 		dist = distance_to_wall(g, ray, ray_angle);
-		cub_draw(g, ray, ray_count, dist);
+		//cub_draw(g, ray, ray_count, dist);
 		ray_angle += ray.incre_angle;
 	}
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);

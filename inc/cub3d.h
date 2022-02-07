@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/06 21:17:46 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:38:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <math.h>
 
+/* Enum to handle various exit/error messages */
 typedef enum e_cub_err
 {
 	end,
@@ -39,6 +40,7 @@ typedef enum e_cub_err
 	inv_tex
 }				t_cub_err;
 
+/* Struct to handle rgb colors with transparency */
 typedef struct s_color
 {
 	short	t;
@@ -47,6 +49,7 @@ typedef struct s_color
 	short	b;
 }				t_color;
 
+/* Every image corresponding to a wall texture, plus floor and ceiling */
 typedef struct s_tex
 {
 	void	*north;
@@ -57,13 +60,29 @@ typedef struct s_tex
 	int		hex_ceiling;
 }				t_tex;
 
+/* Struct to store various attributes of our player */
 typedef struct s_player
 {
-	t_vector	v;
+	t_vector	pos;
 	char		dir;
 }				t_player;
 
-typedef struct s_map
+/* Struct to store all ray-casting-related data */
+typedef struct s_ray
+{
+	float	x;
+	float	y;
+	float	incre_angle;
+	int		angle;
+	int		hfov;
+	int		width;
+	int		height;
+	int		ray_angle;
+	int		precision;
+}				t_ray;
+
+/* Handles most game attributes */
+typedef struct s_game
 {
 	int			fd;
 	char		**map;
@@ -71,50 +90,37 @@ typedef struct s_map
 	int			width;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_img		win_img;
 	t_tex		tex;
+	t_ray		ray;
 	t_player	pl;
-}				t_map;
-
-typedef struct s_data
-{
-	int		angle;
-	int		hfov;
-	int		width;
-	int		height;
-	int		ray_angle;
-	float	incre_angle;
-	float	x;
-	float	y;
-	int		precision;
-	t_img	i;
-}				t_data;
-
+}				t_game;
 
 /* Check possible map errors */
-void	check_map(char *file, t_map *m);
+void	check_map(char *file, t_game *g);
 
 /* Prints appropriate error message and exits, freeing everything */
-int		cub_perror(t_cub_err err, t_map *m, char *param, int c);
+int		cub_perror(t_cub_err err, t_game *g, char *param, int c);
 
 /* Prints usage for the cub3D program */
 void	cub_usage(int errno);
 
-/* Atoi for colors */
+/* Atoi for colors (more restrictive than original) */
 int		cub_atoi(const char *nptr, short *nbr);
 
-/* Fill color int */
-void	get_cf_color(char **dir, t_map *m);
+/* Fills color int for floor and ceiling */
+void	get_cf_color(char **dir, t_game *g);
 
 /* Frees all necessary things before exiting */
-void	cub_end(t_map *m);
+void	cub_end(t_game *g);
 
-/* Initialize game */
-void	game_init(t_map *m);
+/* Initializes game */
+void	game_init(t_game *g);
 
-/* Draw game */
-void	draw_game(t_map *m);
+/* Draws game */
+void	draw_game(t_game *g);
 
-/* Converts degrees to radius */
+/* Converts degrees to radians */
 float	degree_to_radians(int degree);
 
 #endif

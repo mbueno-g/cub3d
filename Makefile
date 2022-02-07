@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/03 18:15:57 by mbueno-g         ###   ########.fr        #
+#    Updated: 2022/02/07 11:08:26 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ END = end_mac.c
 ifeq ($(UNAME), Linux)
 	# Properties for Linux
 	LEAKS = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s -q 
-	LMLX = -lmlx -lXext -lX11
+	LMLX = -lmlx -lXext -lX11 -lm
 	END = end_linux.c
 	CDEBUG = -g3
 

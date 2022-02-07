@@ -6,94 +6,95 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/06 21:19:43 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:50:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	init_t_data(t_data *d, t_map *m)
+void	init_t_data(t_ray *ray, t_game *g)
 {
-	d->angle = 90;
-	d->hfov = 30;
-	d->width = 640;
-	d->height = 480;
-	d->incre_angle = 60 / 640;
-	d->precision = 64;
-	d->x = m->pl.v.y;
-	d->y = m->pl.v.x;
+	ray->angle = 90;
+	ray->hfov = 30;
+	ray->width = 640;
+	ray->height = 480;
+	ray->incre_angle = ray->angle / ray->width;
+	ray->precision = 64;
+	ray->x = g->pl.pos.y;
+	ray->y = g->pl.pos.x;
 }
 
-float	distance_to_wall(t_map *m, t_data d, float ray_angle)
+float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
 {
-	float	dis;
+	float	dist;
 	float	x;
 	float	y;
 	float	ray_cos;
 	float	ray_sen;
 
-	ray_cos = cos(degree_to_radians(ray_angle)) / d.precision;
-	ray_sen = sin(degree_to_radians(ray_angle)) / d.precision;
-	x = m->pl.v.y;
-	y = m->pl.v.x;
-	while (m->map[(int) y][(int) x] != '1')
+	ray_cos = cos(degree_to_radians(ray_angle)) / ray.precision;
+	ray_sen = sin(degree_to_radians(ray_angle)) / ray.precision;
+	x = g->pl.pos.y;
+	y = g->pl.pos.x;
+	while (g->map[(int)y][(int)x] != '1')
 	{
 		x += ray_sen;
 		y += ray_cos;
 	}
-	dis = sqrt((x - d.x) * (x - d.x) + (y - d.y) * (y - d.y));
-	return (dis);
+	dist = sqrt((x - ray.x) * (x - ray.x) + (y - ray.y) * (y - ray.y));
+	return (dist);
 }
 
-void	draw(t_map *m, t_data d, int ray_count, float dis)
+void	cub_draw(t_game *g, t_ray ray, int ray_count, float dis)
 {
 	int	wall_height;
 	int	ds;
 	int	j;
 
-	wall_height = (int)(d.height / (2 * dis));
-	ds = 240 - wall_height;
+	wall_height = (int)(ray.height / (2 * dis));
+	ds = (ray.height / 2) - wall_height;
 	j = -1;
-	while (++j < 480)
+	while (++j < ray.height)
 	{
 		if (j < ds)
-			my_mlx_pixel_put(&d.i, ray_count, j, m->tex.hex_ceiling);
-		else if (j >= ds && j < (240 + wall_height))
-			my_mlx_pixel_put(&d.i, ray_count, j, 0x000000);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.hex_ceiling);
+		else if (j >= ds && j < ((ray.height / 2) + wall_height))
+			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00000000);
 		else
-			my_mlx_pixel_put(&d.i, ray_count, j, m->tex.hex_floor);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.hex_floor);
 	}
 }
 
-void	raicasting(t_map *m)
+void	cub_raycast(t_game *g)
 {
-	t_data	d;
+	t_ray	ray;
 	float	ray_angle;
 	int		ray_count;
-	float	dis;
+	float	dist;
 
-	init_t_data(&d, m);
-	ray_angle = d.angle - d.hfov;
+	init_t_data(&ray, g);
+	ray_angle = ray.angle - ray.hfov;
 	ray_count = -1;
-	d.i.img = mlx_new_image(m->mlx_ptr, d.width, d.height);
-	d.i.addr = mlx_get_data_addr(d.i.img, &d.i.bpp, &d.i.line_len, &d.i.endian);
-	while (++ray_count < d.width)
+	g->win_img.img = mlx_new_image(g->mlx_ptr, ray.width, ray.height);
+	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
+		&g->win_img.line_len, &g->win_img.endian);
+	while (++ray_count < ray.width)
 	{
-		dis = distance_to_wall(m, d, ray_angle);
-		draw(m, d, ray_count, dis);
-		mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, d.i.img, 0, 0);
+		dist = distance_to_wall(g, ray, ray_angle);
+		cub_draw(g, ray, ray_count, dist);
 		ray_angle += 0.09375;
 	}
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
 }
 
-void	game_init(t_map *m)
+void	game_init(t_game *g)
 {
-	m->win_ptr = mlx_new_window(m->mlx_ptr, 640, 480, ":)");
-	raicasting(m);
+	g->win_ptr = mlx_new_window(g->mlx_ptr, 640, 480, ":)");
+	cub_raycast(g);
 	//mlx_loop_hook(m->mlx_ptr, ft_reset, &m);
-	mlx_hook(m->win_ptr, 17, 0, NULL, &m);
+	mlx_hook(g->win_ptr, 17, 0, NULL, &g);
 	//mlx_key_hook(m->win_ptr, ft_key_hook, &m);
-	mlx_loop(m->mlx_ptr);
+	mlx_loop(g->mlx_ptr);
 }
 
 /*void draw_game(t_map *m)

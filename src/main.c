@@ -6,12 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/06 20:38:47 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:50:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include <mlx.h>
 
 static void	check_file(int argc, char **argv)
 {
@@ -28,34 +27,35 @@ static void	check_file(int argc, char **argv)
 		cub_perror(inv_ext, NULL, NULL, 1);
 }
 
-static t_map	init_t_map(void)
+static t_game	cub_init(void)
 {
-	t_map	m;
+	t_game	g;
 
-	m.width = 0;
-	m.height = 0;
-	m.map = NULL;
-	m.pl.dir = 'M';
-	m.mlx_ptr = NULL;
-	m.mlx_ptr = mlx_init();
-	m.tex.north = NULL;
-	m.tex.south = NULL;
-	m.tex.east = NULL;
-	m.tex.west = NULL;
-	m.pl.v.x = -1;
-	m.pl.v.y = -1;
-	return (m);
+	g.width = 0;
+	g.height = 0;
+	g.map = NULL;
+	g.pl.dir = 'M';
+	g.mlx_ptr = NULL;
+	g.win_img.img = NULL;
+	g.mlx_ptr = mlx_init();
+	g.tex.north = NULL;
+	g.tex.south = NULL;
+	g.tex.east = NULL;
+	g.tex.west = NULL;
+	g.pl.pos.x = -1;
+	g.pl.pos.y = -1;
+	return (g);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map	m;
+	t_game	g;
 
 	check_file(argc, argv);
-	m = init_t_map();
-	check_map(argv[1], &m);
-	game_init(&m);
+	g = cub_init();
+	check_map(argv[1], &g);
+	game_init(&g);
 	//draw_game(&m);
-	cub_perror(end, &m, NULL, 1);
+	cub_perror(end, &g, NULL, 1);
 	return (0);
 }

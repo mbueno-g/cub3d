@@ -1,8 +1,8 @@
 # cub3d
-{42Madrid}
 
-🚧 WIP 
+*My first raycaster with MiniLibX 💡*
 
+🚧 WIP: Magic under development 🚧
 
 <!--
 :collision: [New concept](#new-concept): Render + Raycasting

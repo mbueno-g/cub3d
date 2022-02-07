@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 18:19:21 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:45:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ static t_game	cub_init(void)
 	g.map = NULL;
 	g.pl.dir = 'M';
 	g.mlx_ptr = NULL;
+	g.win_ptr = NULL;
 	g.win_img.img = NULL;
 	g.mlx_ptr = mlx_init();
-	g.tex.north = NULL;
-	g.tex.south = NULL;
-	g.tex.east = NULL;
-	g.tex.west = NULL;
-	g.tex.hex_floor = -1;
-	g.tex.hex_ceiling = -1;
+	g.tex.n = NULL;
+	g.tex.s = NULL;
+	g.tex.e = NULL;
+	g.tex.w = NULL;
+	g.tex.floor = -1;
+	g.tex.ceiling = -1;
 	g.pl.x = -1;
 	g.pl.y = -1;
 	return (g);
@@ -57,7 +58,5 @@ int	main(int argc, char **argv)
 	g = cub_init();
 	check_map(argv[1], &g);
 	game_init(&g);
-	//draw_game(&m);
-	cub_perror(end, &g, NULL, 1);
 	return (0);
 }

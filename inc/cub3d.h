@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 16:43:06 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:59:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_color
 /* Every image corresponding to a wall texture, plus floor and ceiling */
 typedef struct s_tex
 {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
-	int		hex_floor;
-	int		hex_ceiling;
+	void	*n;
+	void	*s;
+	void	*w;
+	void	*e;
+	int		floor;
+	int		ceiling;
 }				t_tex;
 
 /* Struct to store various attributes of our player */
@@ -104,6 +104,9 @@ int		cub_perror(t_cub_err err, t_game *g, char *param, int c);
 
 /* Prints usage for the cub3D program */
 void	cub_usage(int errno);
+
+/* Function called by mlx when exiting */
+int		cub_exit(void *param);
 
 /* Atoi for colors (more restrictive than original) */
 int		cub_atoi(const char *nptr, short *nbr);

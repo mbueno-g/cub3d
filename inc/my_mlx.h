@@ -6,13 +6,15 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:07:58 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 11:12:22 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:45:02 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MY_MLX_H
 
 # define MY_MLX_H
+
+# include "../libft/inc/libft.h"
 
 typedef struct s_img
 {
@@ -28,5 +30,8 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 /* Retrieves color as int at given position from an image */
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
+
+/* Draws a section of a screen in a certain color */
+void			my_mlx_area_put(t_img *d, t_vector p, t_vector dim, int c);
 
 #endif

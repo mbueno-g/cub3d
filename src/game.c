@@ -6,22 +6,24 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 19:59:09 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:58:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	init_t_data(t_ray *ray, t_game *g)
+void	init_ray(t_game *g)
 {
-	ray->angle = 45;
-	ray->hfov = 30;
-	ray->width = 640;
-	ray->height = 480;
-	ray->incre_angle = 2 * ray->hfov / ray->width;
-	ray->precision = 500;
-	ray->x = g->pl.y;
-	ray->y = g->pl.x;
+	t_ray	ray;
+
+	g->ray.angle = 45;
+	g->ray.hfov = 30;
+	g->ray.width = 640;
+	g->ray.height = 480;
+	g->ray.incre_angle = 2 * g->ray.hfov / g->ray.width;
+	g->ray.precision = 500;
+	g->ray.x = g->pl.y;
+	g->ray.y = g->pl.x;
 }
 
 float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
@@ -42,9 +44,11 @@ float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
 		x += ray_cos;
 		y += ray_sen;
 		if (g->map[(int)y][(int)x] == '1')
-			my_mlx_pixel_put(&g->win_img, y * ray.height /g->height, x * ray.width / 29, 0x00FF0000);
+			my_mlx_pixel_put(&g->win_img, y * ray.height / g->height, \
+				x * ray.width / 29, 0x00FF0000);
 		else
-			my_mlx_pixel_put(&g->win_img, y * ray.height /g->height, x * ray.width / 29, 0x00FFFFFF);
+			my_mlx_pixel_put(&g->win_img, y * ray.height / g->height, \
+				x * ray.width / 29, 0x00FFFFFF);
 	}
 	dist = sqrt((x - ray.x) * (x - ray.x) + (y - ray.y) * (y - ray.y));
 	dist = dist * cos(degree_to_radians(ray_angle - ray.angle));
@@ -63,11 +67,40 @@ void	cub_draw(t_game *g, t_ray ray, int ray_count, float dis)
 	while (++j < ray.height)
 	{
 		if (j < ds)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.hex_ceiling);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.ceiling);
 		else if (j >= ds && j < ((ray.height / 2) + wall_height))
 			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00000000);
 		else
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.hex_floor);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
+	}
+}
+
+void	cub_minimap(t_game *g)
+{
+	int	xy[2];
+	int	color;
+
+	g->win_img.img = mlx_new_image(g->mlx_ptr, 2 * g->ray.width, \
+		2 * g->ray.height);
+	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
+		&g->win_img.line_len, &g->win_img.endian);
+	xy[1] = -1;
+	while (++xy[1] < g->height)
+	{
+		xy[0] = -1;
+		while (++xy[0] < g->width)
+		{
+			color = 0x00FDD663;
+			if (g->map[xy[1]][xy[0]] == '1')
+				color = 0x0087FFC5;
+			else if (g->map[xy[1]][xy[0]] == '0')
+				color = 0x005E5C64;
+			my_mlx_area_put(&g->win_img, \
+				ft_newvector(xy[0] * (g->ray.width / g->width), \
+				xy[1] * (g->ray.height / g->height)), \
+				ft_newvector(g->ray.width / g->width, \
+				g->ray.height / g->height), color);
+		}
 	}
 }
 
@@ -78,27 +111,25 @@ void	cub_raycast(t_game *g)
 	int		ray_count;
 	float	dist;
 
-	init_t_data(&ray, g);
 	ray_angle = ray.angle - ray.hfov;
 	ray_count = -1;
-	g->win_img.img = mlx_new_image(g->mlx_ptr, ray.width, ray.height);
-	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
-		&g->win_img.line_len, &g->win_img.endian);
 	while (++ray_count < ray.width)
 	{
 		dist = distance_to_wall(g, ray, ray_angle);
 		//cub_draw(g, ray, ray_count, dist);
 		ray_angle += ray.incre_angle;
 	}
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
 }
 
 void	game_init(t_game *g)
 {
 	g->win_ptr = mlx_new_window(g->mlx_ptr, 640, 480, ":)");
-	cub_raycast(g);
+	init_ray(g);
+	cub_minimap(g);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
+	//cub_raycast(g);
 	//mlx_loop_hook(m->mlx_ptr, ft_reset, &m);
-	mlx_hook(g->win_ptr, 17, 0, NULL, &g);
+	mlx_hook(g->win_ptr, 17, 0, cub_exit, g);
 	//mlx_key_hook(m->win_ptr, ft_key_hook, &m);
 	mlx_loop(g->mlx_ptr);
 }

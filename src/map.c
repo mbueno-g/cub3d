@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 19:50:44 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:55:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	check_textures(char *trim, t_game *g)
 		cub_perror(no_memory, g, NULL, 1);
 	}
 	else if (!ft_strncmp(dir[0], "NO", 3))
-		g->tex.north = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		g->tex.n = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
 	else if (!ft_strncmp(dir[0], "SO", 3))
-		g->tex.south = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		g->tex.s = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
 	else if (!ft_strncmp(dir[0], "WE", 3))
-		g->tex.west = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		g->tex.w = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
 	else if (!ft_strncmp(dir[0], "EA", 3))
-		g->tex.east = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		g->tex.e = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
 	else if (!ft_strncmp(dir[0], "F", 2) || !ft_strncmp(dir[0], "C", 2))
 		get_cf_color(dir, g);
 	ft_free_matrix(&dir);
@@ -39,8 +39,7 @@ void	check_textures(char *trim, t_game *g)
 
 void	read_map(char *file, t_game *g)
 {
-	char	*line;
-	char	*aux;
+	char	*line[2];
 	int		i;
 
 	i = 0;
@@ -48,22 +47,23 @@ void	read_map(char *file, t_game *g)
 	cub_perror(inv_file, g, file, g->fd < 0);
 	while (1)
 	{
-		line = get_next_line(g->fd);
-		if (!line)
+		line[0] = get_next_line(g->fd);
+		if (!line[0])
 			break ;
-		aux = ft_strtrim(line, "\n");
-		free(line);
-		if (aux && aux[0] && ++i < 7)
-			check_textures(aux, g);
-		else if ((aux && aux[0]) || i >= 7)
-			g->map = ft_extend_matrix(g->map, aux);
-		free(aux);
+		line[1] = ft_strtrim(line[0], "\n");
+		free(line[0]);
+		if ((int)ft_strlen(line[1]) > g->width)
+			g->width = ft_strlen(line[1]);
+		if (line[1] && line[1][0] && ++i < 7)
+			check_textures(line[1], g);
+		else if ((line[1] && line[1][0]) || i >= 7)
+			g->map = ft_extend_matrix(g->map, line[1]);
+		free(line[1]);
 	}
 	cub_perror(empty_file, g, NULL, !i);
 	g->height = ft_matrixlen(g->map);
-	if (!g->tex.north || !g->tex.south || !g->tex.east || !g->tex.west \
-		|| g->tex.hex_floor == -1 || g->tex.hex_ceiling == -1)
-		cub_perror(inv_tex, g, NULL, 1);
+	cub_perror(inv_tex, g, NULL, !(!g->tex.n || !g->tex.s || \
+		!g->tex.e || !g->tex.w || g->tex.floor == -1 || g->tex.ceiling));
 }
 
 void	check_characters(int j, t_game *g)

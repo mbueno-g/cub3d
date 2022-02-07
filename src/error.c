@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 12:08:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 00:06:28 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,10 @@ void	cub_usage(int errno)
 	ft_putstr_fd("Cub3D\nA simple raycaster with MinilibX\n\n", 2);
 	ft_putstr_fd("usage: cub3d <map_file.cub>\n", 2);
 	exit(errno);
+}
+
+int		cub_exit(void *param)
+{
+	cub_perror(end, param, NULL, 1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 22:58:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 00:13:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	cub_minimap(t_game *g)
 		{
 			color = 0x00FDD663;
 			if (g->map[xy[1]][xy[0]] == '1')
-				color = 0x0087FFC5;
+				color = 0x008BB5F8;
 			else if (g->map[xy[1]][xy[0]] == '0')
 				color = 0x005E5C64;
 			my_mlx_area_put(&g->win_img, \

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 22:59:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:21:45 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+
+# ifndef WIN_H
+#  define WIN_H 480
+# endif
+
+# ifndef WIN_W
+#  define WIN_W 640
+# endif
+
+# define SIZE 15
 
 /* Enum to handle various exit/error messages */
 typedef enum e_cub_err
@@ -78,6 +88,7 @@ typedef struct s_ray
 	float	hfov;
 	int		width;
 	int		height;
+	float	lim;
 	int		precision;
 }				t_ray;
 
@@ -91,6 +102,7 @@ typedef struct s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		win_img;
+	t_img		minimap;
 	t_tex		tex;
 	t_ray		ray;
 	t_player	pl;
@@ -125,5 +137,8 @@ void	draw_game(t_game *g);
 
 /* Converts degrees to radians */
 float	degree_to_radians(float degree);
+
+/* Draws a 2D minimap at the bottom right of the screen */
+void	cub_minimap(t_game *g);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 22:55:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:05:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	check_textures(char *trim, t_game *g)
 	int		w;
 
 	dir = ft_split(trim, ' ');
-	ft_putmatrix_fd(dir, 1, 1);
 	if (!dir)
 	{
 		free(trim);
@@ -73,18 +72,18 @@ void	check_characters(int j, t_game *g)
 	i = -1;
 	while (++i < (int) ft_strlen(g->map[j]))
 	{
-		if (g->pl.dir == 'M' && ft_strchr("NSWE", g->map[j][i]))
+		if (!g->pl.dir && ft_strchr("NSWE", g->map[j][i]))
 		{
 			g->pl.dir = g->map[j][i];
 			g->pl.x = (float) i;
 			g->pl.y = (float) j;
 		}
-		else if (g->pl.dir != 'M' && ft_strchr("NSWE", g->map[j][i]))
+		else if (g->pl.dir && ft_strchr("NSWE", g->map[j][i]))
 			cub_perror(inv_player, g, NULL, 1);
 		else if (!ft_strchr("01", g->map[j][i]))
 			cub_perror(inv_charac, g, NULL, 1);
 	}
-	if (j == g->height - 1 && g->pl.dir == 'M')
+	if (j == g->height - 1 && !g->pl.dir)
 		cub_perror(inv_player, g, NULL, 1);
 }
 

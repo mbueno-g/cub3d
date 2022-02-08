@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/07 11:08:26 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/02/08 12:09:10 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,10 +76,13 @@ PRINTF = LC_NUMERIC="en_US.UTF-8" printf
 LIBFT = libft/bin/libft.a
 GNL_DIR = get_next_line
 
+# Window Size
+WIN_SIZE = -D WIN_W=1920 -D WIN_H=1280
+
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
-SRC = main.c map.c error.c color.c utils.c game.c my_mlx.c $(END)
+SRC = main.c map.c error.c color.c utils.c game.c my_mlx.c minimap.c $(END)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 
@@ -110,7 +113,7 @@ $(NAME): create_dirs compile_libft $(OBJ_GNL) $(OBJ)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
-	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CDEBUG) $(KEYCODES) $(WIN_SIZE) -c $< -o $@
 
 $(OBJ_GNL_DIR)/%.o: $(GNL_DIR)/%.c
 	@$(eval SRC_GNL_COUNT = $(shell expr $(SRC_GNL_COUNT) + 1))

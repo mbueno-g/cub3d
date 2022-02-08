@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:06:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/07 22:51:45 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 09:40:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	cub_end(t_game *g)
 			mlx_destroy_image(g->mlx_ptr, g->win_img.img);
 		if (g->win_ptr)
 			mlx_destroy_window(g->mlx_ptr, g->win_ptr);
+		if (g->minimap.img)
+			mlx_destroy_image(g->mlx_ptr, g->minimap.img);
 		mlx_destroy_display(g->mlx_ptr);
 		free(g->mlx_ptr);
 	}

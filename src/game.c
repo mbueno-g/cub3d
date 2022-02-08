@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/08 00:13:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:35:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,123 +14,92 @@
 
 void	init_ray(t_game *g)
 {
-	t_ray	ray;
-
-	g->ray.angle = 45;
+	g->ray.angle = 180;
 	g->ray.hfov = 30;
-	g->ray.width = 640;
-	g->ray.height = 480;
+	g->ray.width = WIN_W;
+	g->ray.height = WIN_H;
 	g->ray.incre_angle = 2 * g->ray.hfov / g->ray.width;
-	g->ray.precision = 500;
+	g->ray.precision = 45;
+	g->ray.lim = 100;
 	g->ray.x = g->pl.y;
 	g->ray.y = g->pl.x;
 }
 
-float	distance_to_wall(t_game *g, t_ray ray, float ray_angle)
+float	distance_to_wall(t_game *g, float ray_angle)
 {
-	float	dist;
+	float	d;
 	float	x;
 	float	y;
 	float	ray_cos;
 	float	ray_sen;
 
-	ray_cos = cos(degree_to_radians(ray_angle)) / ray.precision;
-	ray_sen = sin(degree_to_radians(ray_angle)) / ray.precision;
-	x = g->pl.x;
-	y = g->pl.y;
-	printf("s %f, %f\n", ray_cos, ray_sen);
+	ray_cos = cos(degree_to_radians(ray_angle)) / g->ray.precision;
+	ray_sen = sin(degree_to_radians(ray_angle)) / g->ray.precision;
+	x = g->pl.x + .5;
+	y = g->pl.y + .5;
 	while (g->map[(int)y][(int)x] != '1')
 	{
 		x += ray_cos;
 		y += ray_sen;
 		if (g->map[(int)y][(int)x] == '1')
-			my_mlx_pixel_put(&g->win_img, y * ray.height / g->height, \
-				x * ray.width / 29, 0x00FF0000);
+			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00FF0000);
 		else
-			my_mlx_pixel_put(&g->win_img, y * ray.height / g->height, \
-				x * ray.width / 29, 0x00FFFFFF);
+			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00BDC1C6);
 	}
-	dist = sqrt((x - ray.x) * (x - ray.x) + (y - ray.y) * (y - ray.y));
-	dist = dist * cos(degree_to_radians(ray_angle - ray.angle));
-	return (dist);
+	d = sqrt((x - g->ray.x) * (x - g->ray.x) + (y - g->ray.y) * (y - g->ray.y));
+	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
+	return (d);
 }
 
-void	cub_draw(t_game *g, t_ray ray, int ray_count, float dis)
+void	cub_draw(t_game *g, int ray_count, float dis)
 {
 	int	wall_height;
 	int	ds;
 	int	j;
 
-	wall_height = (int)(ray.height / (2 * dis));
-	ds = (ray.height / 2) - wall_height;
+	wall_height = (int)(g->ray.height / (2 * dis));
+	ds = (g->ray.height / 2) - wall_height;
 	j = -1;
-	while (++j < ray.height)
+	while (++j < g->ray.height)
 	{
 		if (j < ds)
 			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.ceiling);
-		else if (j >= ds && j < ((ray.height / 2) + wall_height))
+		else if (j >= ds && j < ((g->ray.height / 2) + wall_height))
 			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00000000);
 		else
 			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
 	}
 }
 
-void	cub_minimap(t_game *g)
-{
-	int	xy[2];
-	int	color;
-
-	g->win_img.img = mlx_new_image(g->mlx_ptr, 2 * g->ray.width, \
-		2 * g->ray.height);
-	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
-		&g->win_img.line_len, &g->win_img.endian);
-	xy[1] = -1;
-	while (++xy[1] < g->height)
-	{
-		xy[0] = -1;
-		while (++xy[0] < g->width)
-		{
-			color = 0x00FDD663;
-			if (g->map[xy[1]][xy[0]] == '1')
-				color = 0x008BB5F8;
-			else if (g->map[xy[1]][xy[0]] == '0')
-				color = 0x005E5C64;
-			my_mlx_area_put(&g->win_img, \
-				ft_newvector(xy[0] * (g->ray.width / g->width), \
-				xy[1] * (g->ray.height / g->height)), \
-				ft_newvector(g->ray.width / g->width, \
-				g->ray.height / g->height), color);
-		}
-	}
-}
-
 void	cub_raycast(t_game *g)
 {
-	t_ray	ray;
 	float	ray_angle;
 	int		ray_count;
 	float	dist;
 
-	ray_angle = ray.angle - ray.hfov;
+	ray_angle = g->ray.angle - g->ray.hfov;
 	ray_count = -1;
-	while (++ray_count < ray.width)
+	g->win_img.img = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
+	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
+		&g->win_img.line_len, &g->win_img.endian);
+	while (++ray_count < g->ray.width)
 	{
-		dist = distance_to_wall(g, ray, ray_angle);
-		//cub_draw(g, ray, ray_count, dist);
-		ray_angle += ray.incre_angle;
+		dist = distance_to_wall(g, ray_angle);
+		cub_draw(g, ray_count, dist);
+		ray_angle += g->ray.incre_angle;
 	}
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
 }
 
 void	game_init(t_game *g)
 {
-	g->win_ptr = mlx_new_window(g->mlx_ptr, 640, 480, ":)");
+	g->win_ptr = mlx_new_window(g->mlx_ptr, WIN_W, WIN_H, ":)");
 	init_ray(g);
 	cub_minimap(g);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
-	//cub_raycast(g);
-	//mlx_loop_hook(m->mlx_ptr, ft_reset, &m);
+	cub_raycast(g);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->minimap.img, \
+		WIN_W - (g->width * SIZE) - 10, WIN_H - (g->height * SIZE) - 10);
 	mlx_hook(g->win_ptr, 17, 0, cub_exit, g);
-	//mlx_key_hook(m->win_ptr, ft_key_hook, &m);
 	mlx_loop(g->mlx_ptr);
 }
 

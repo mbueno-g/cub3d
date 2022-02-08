@@ -6,11 +6,29 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 13:59:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:59:09 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	init_ray(t_game *g)
+{
+	g->ray.angle = 0;
+	if (g->pl.dir == 'S')
+		g->ray.angle = 90;
+	else if (g->pl.dir == 'W')
+		g->ray.angle = 180;
+	if (g->pl.dir == 'N')
+		g->ray.angle = 270;
+	g->ray.oldangle = g->ray.angle;
+	g->ray.hfov = 30;
+	g->ray.width = WIN_W;
+	g->ray.height = WIN_H;
+	g->ray.incre_angle = 2 * g->ray.hfov / g->ray.width;
+	g->ray.precision = 20;
+	g->ray.lim = 100;
+}
 
 float	distance_to_wall(t_game *g, float ray_angle)
 {
@@ -18,22 +36,25 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	float	x;
 	float	y;
 	float	ray_cos;
-	float	ray_sen;
+	float	ray_sin;
 
 	ray_cos = cos(degree_to_radians(ray_angle)) / g->ray.precision;
-	ray_sen = sin(degree_to_radians(ray_angle)) / g->ray.precision;
-	x = g->pl.x + .5;
-	y = g->pl.y + .5;
+	ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
+	x = g->pl.x + 0.5;
+	y = g->pl.y + 0.5;
+	my_mlx_area_put(&g->minimap, \
+		ft_newvector((int)x * SIZE, (int)y * SIZE), \
+		ft_newvector(SIZE, SIZE), 0x00FDD663);
 	while (g->map[(int)y][(int)x] != '1')
 	{
 		x += ray_cos;
-		y += ray_sen;
+		y += ray_sin;
 		if (g->map[(int)y][(int)x] == '1')
 			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00FF0000);
 		else
 			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00BDC1C6);
 	}
-	d = sqrt((x - g->ray.x) * (x - g->ray.x) + (y - g->ray.y) * (y - g->ray.y));
+	d = sqrt((x - g->pl.x) * (x - g->pl.x) + (y - g->pl.y) * (y - g->pl.y));
 	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
 	return (d);
 }

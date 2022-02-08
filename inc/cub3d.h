@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 13:46:40 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:36:12 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ typedef struct s_player
 /* Struct to store all ray-casting-related data */
 typedef struct s_ray
 {
-	float	x;
-	float	y;
 	float	incre_angle;
 	float	angle;
 	float	oldangle;
@@ -138,6 +136,9 @@ void	game_init(t_game *g);
 
 /* Draws game */
 void	draw_game(t_game *g);
+
+/* Initialize raycast data */
+void	init_ray(t_game *g);
 
 /* Converts degrees to radians */
 float	degree_to_radians(float degree);

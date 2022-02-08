@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 09:26:18 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:46:59 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static t_game	cub_init(void)
 
 	g.width = 0;
 	g.height = 0;
+	g.nframes = 0;
 	g.map = NULL;
 	g.pl.dir = 0;
 	g.mlx_ptr = NULL;

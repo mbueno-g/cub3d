@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/09 16:01:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 21:30:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	cub_mouse(int x, int y, void *param)
 
 	g = param;
 	if (x > g->mouse_x && y != -1)
-		g->ray.angle += 2;
-	else if (y != -1)
-		g->ray.angle -= 2;
+		g->ray.angle += 1;
+	else if (x < g->mouse_x && y != -1)
+		g->ray.angle -= 1;
 	g->mouse_x = x;
 	return (0);
 }

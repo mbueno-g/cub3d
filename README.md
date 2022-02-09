@@ -4,8 +4,9 @@
 
 🚧 WIP: Magic under development 🚧
 
-![video](https://user-images.githubusercontent.com/40824677/153049830-95186e1a-4a62-4198-9094-6dbf9b17864f.gif)
-
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/153289649-f3789a4c-c53a-4951-bb9c-f694dee893a0.gif">
+</p>
 <!--
 :collision: [New concept](#new-concept): Render + Raycasting
 

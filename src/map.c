@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/08 11:05:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:36:56 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	check_textures(char *trim, t_game *g)
 {
 	char	**dir;
-	int		w;
 
 	dir = ft_split(trim, ' ');
 	if (!dir)
@@ -24,13 +23,13 @@ void	check_textures(char *trim, t_game *g)
 		cub_perror(no_memory, g, NULL, 1);
 	}
 	else if (!ft_strncmp(dir[0], "NO", 3))
-		g->tex.n = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		mlx_load_img(g->mlx_ptr, &g->tex.n, dir[1]);
 	else if (!ft_strncmp(dir[0], "SO", 3))
-		g->tex.s = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
-	else if (!ft_strncmp(dir[0], "WE", 3))
-		g->tex.w = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		mlx_load_img(g->mlx_ptr, &g->tex.s, dir[1]);
 	else if (!ft_strncmp(dir[0], "EA", 3))
-		g->tex.e = mlx_xpm_file_to_image(g->mlx_ptr, dir[1], &w, &w);
+		mlx_load_img(g->mlx_ptr, &g->tex.e, dir[1]);
+	else if (!ft_strncmp(dir[0], "WE", 3))
+		mlx_load_img(g->mlx_ptr, &g->tex.w, dir[1]);
 	else if (!ft_strncmp(dir[0], "F", 2) || !ft_strncmp(dir[0], "C", 2))
 		get_cf_color(dir, g);
 	ft_free_matrix(&dir);
@@ -61,8 +60,8 @@ void	read_map(char *file, t_game *g)
 	}
 	cub_perror(empty_file, g, NULL, !i);
 	g->height = ft_matrixlen(g->map);
-	cub_perror(inv_tex, g, NULL, !(!g->tex.n || !g->tex.s || \
-		!g->tex.e || !g->tex.w || g->tex.floor == -1 || g->tex.ceiling));
+	cub_perror(inv_tex, g, NULL, !(!g->tex.n.i || !g->tex.s.i || \
+		!g->tex.e.i || !g->tex.w.i || g->tex.floor == -1 || g->tex.ceiling));
 }
 
 void	check_characters(int j, t_game *g)
@@ -75,8 +74,8 @@ void	check_characters(int j, t_game *g)
 		if (!g->pl.dir && ft_strchr("NSWE", g->map[j][i]))
 		{
 			g->pl.dir = g->map[j][i];
-			g->pl.x = (float) i;
-			g->pl.y = (float) j;
+			g->pl.x = (float)i;
+			g->pl.y = (float)j;
 		}
 		else if (g->pl.dir && ft_strchr("NSWE", g->map[j][i]))
 			cub_perror(inv_player, g, NULL, 1);

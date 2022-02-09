@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:13:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 22:45:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:20:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,29 @@ void	my_mlx_area_put(t_img *d, t_vector p, t_vector dim, int c)
 		x = -1;
 		while (++x < dim.x)
 			my_mlx_pixel_put(d, p.x + x, p.y + y, c);
+	}
+}
+
+void	mlx_load_img(void *ptr, t_img *i, char *path)
+{
+	i->i = mlx_xpm_file_to_image(ptr, path, &i->width, &i->height);
+	i->addr = mlx_get_data_addr(i->i, &i->bpp, &i->line_len, &i->endian);
+}
+
+void	mlx_img_to_img(int p[2], t_img img[2], int igncolor)
+{
+	int	xy[2];
+	int	color;
+
+	xy[1] = -1;
+	while (++xy[1] < img[0].height)
+	{
+		xy[0] = -1;
+		while (++xy[0] < img[0].width)
+		{
+			color = my_mlx_pixel_get(&img[0], xy[0], xy[1]);
+			if (color != igncolor)
+				my_mlx_pixel_put(&img[1], xy[0] + p[0], xy[1] + p[1], color);
+		}
 	}
 }

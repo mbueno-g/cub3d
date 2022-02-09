@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 17:26:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:23:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	cub_minimap(t_game *g)
 	int	xy[2];
 	int	color;
 
-	if (g->minimap.img)
-		mlx_destroy_image(g->mlx_ptr, g->minimap.img);
-	g->minimap.img = mlx_new_image(g->mlx_ptr, g->width * SIZE, \
+	if (g->minimap.i)
+		mlx_destroy_image(g->mlx_ptr, g->minimap.i);
+	g->minimap.i = mlx_new_image(g->mlx_ptr, g->width * SIZE, \
 		g->height * SIZE);
-	g->minimap.addr = mlx_get_data_addr(g->minimap.img, &g->minimap.bpp, \
+	g->minimap.addr = mlx_get_data_addr(g->minimap.i, &g->minimap.bpp, \
 		&g->minimap.line_len, &g->minimap.endian);
 	xy[1] = -1;
 	while (++xy[1] < g->height)

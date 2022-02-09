@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 13:22:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:59:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 #  define WIN_W 640
 # endif
 
-# define SIZE 15
+# ifndef SIZE
+#  define SIZE 7
+# endif
 
 /* Enum to handle various exit/error messages */
 typedef enum e_cub_err
@@ -63,10 +65,10 @@ typedef struct s_color
 /* Every image corresponding to a wall texture, plus floor and ceiling */
 typedef struct s_tex
 {
-	void	*n;
-	void	*s;
-	void	*w;
-	void	*e;
+	t_img	n;
+	t_img	s;
+	t_img	w;
+	t_img	e;
 	int		floor;
 	int		ceiling;
 }				t_tex;
@@ -102,11 +104,13 @@ typedef struct s_game
 	char		**map;
 	int			height;
 	int			width;
+	int			mouse_x;
 	long		nframes;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		win_img;
 	t_img		minimap;
+	t_img		scope;
 	t_tex		tex;
 	t_ray		ray;
 	t_player	pl;
@@ -150,5 +154,8 @@ void	cub_minimap(t_game *g);
 
 /* Function to shoot rays in a given direction to find walls */
 void	cub_raycast(t_game *g);
+
+/* Function called inside mlx loop */
+int		cub_update(void *param);
 
 #endif

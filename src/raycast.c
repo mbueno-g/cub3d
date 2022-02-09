@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 13:47:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:21:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void	cub_raycast(t_game *g)
 
 	ray_angle = g->ray.angle - g->ray.hfov;
 	ray_count = -1;
-	if (g->win_img.img)
-		mlx_destroy_image(g->mlx_ptr, g->win_img.img);
-	g->win_img.img = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
-	g->win_img.addr = mlx_get_data_addr(g->win_img.img, &g->win_img.bpp, \
+	if (g->win_img.i)
+		mlx_destroy_image(g->mlx_ptr, g->win_img.i);
+	g->win_img.i = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
+	g->win_img.addr = mlx_get_data_addr(g->win_img.i, &g->win_img.bpp, \
 		&g->win_img.line_len, &g->win_img.endian);
 	while (++ray_count < g->ray.width)
 	{
@@ -98,5 +98,5 @@ void	cub_raycast(t_game *g)
 		cub_draw(g, ray_count, dist);
 		ray_angle += g->ray.incre_angle;
 	}
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.img, 0, 0);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.i, 0, 0);
 }

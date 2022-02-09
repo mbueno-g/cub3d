@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/08 13:36:29 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/02/09 15:43:26 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,14 +77,19 @@ LIBFT = libft/bin/libft.a
 GNL_DIR = get_next_line
 
 # Window Size
-WIN_SIZE = -D WIN_W=1920 -D WIN_H=1280
+WIDTH=1080
+HEIGHT=720
+WW=WIN_W=$(WIDTH)
+WH=WIN_H=$(HEIGHT)
+SZ=SIZE=10
+WIN_SIZE = -D $(WW) -D $(WH) -D $(SZ)
 
 # Keycodes defined during compilation
 KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 SRC = main.c map.c error.c color.c	\
-	  utils.c game.c my_mlx.c		\
-	  minimap.c raycast.c $(END)
+	  minimap.c raycast.c render.c	\
+	  utils.c game.c my_mlx.c $(END)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

@@ -6,11 +6,12 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/09 13:47:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:01:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+#include <mlx.h>
 
 int	cub_key(int k, void *param)
 {
@@ -54,27 +55,21 @@ int	cub_keydown(int k, void *param)
 		g->ray.angle -= 4;
 	if (k == KEY_RIGHT)
 		g->ray.angle += 4;
-	move_pl(k, g, ray_cos, ray_sin);
+	if (k == KEY_W || k == KEY_A || k == KEY_S || k == KEY_D)
+		move_pl(k, g, ray_cos, ray_sin);
 	return (0);
 }
 
-int	cub_update(void *param)
+int	cub_mouse(int x, int y, void *param)
 {
 	t_game	*g;
 
 	g = param;
-	if (!g->nframes || g->ray.angle != g->ray.oldangle || \
-		g->pl.oldx != g->pl.x || g->pl.oldy != g->pl.y)
-	{
-		g->ray.oldangle = g->ray.angle;
-		g->pl.oldx = g->pl.x;
-		g->pl.oldy = g->pl.y;
-		cub_minimap(g);
-		cub_raycast(g);
-		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->minimap.img, \
-			WIN_W - (g->width * SIZE) - 10, WIN_H - (g->height * SIZE) - 10);
-	}
-	g->nframes++;
+	if (x > g->mouse_x && y != -1)
+		g->ray.angle += 2;
+	else if (y != -1)
+		g->ray.angle -= 2;
+	g->mouse_x = x;
 	return (0);
 }
 
@@ -84,6 +79,7 @@ void	game_init(t_game *g)
 	init_ray(g);
 	mlx_hook(g->win_ptr, 17, 0, cub_exit, g);
 	mlx_hook(g->win_ptr, 02, 1L << 0, cub_keydown, g);
+	mlx_hook(g->win_ptr, 06, 1L << 6, cub_mouse, g);
 	mlx_key_hook(g->win_ptr, cub_key, g);
 	mlx_loop_hook(g->mlx_ptr, cub_update, g);
 	mlx_loop(g->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:07:58 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 22:45:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:47:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 typedef struct s_img
 {
-	void	*img;
+	int		height;
+	int		width;
+	void	*i;
 	char	*addr;
 	int		bpp;
 	int		line_len;
@@ -33,5 +35,11 @@ unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
 
 /* Draws a section of a screen in a certain color */
 void			my_mlx_area_put(t_img *d, t_vector p, t_vector dim, int c);
+
+/* Loads XPM image and fills t_img struct for it */
+void			mlx_load_img(void *ptr, t_img *i, char *path);
+
+/* Writes first img to second image to given pos, ignoring "igncolor" pixels */
+void			mlx_img_to_img(int p[2], t_img img[2], int igncolor);
 
 #endif

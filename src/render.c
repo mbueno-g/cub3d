@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 16:32:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:50:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	redraw_elem(t_game *g, t_img img, int x, int y)
 	p[1] = y - (img.height / 2);
 	images[0] = img;
 	images[1] = g->win_img;
-	mlx_img_to_img(p, images, 0x00000000, 0xFF000000);
+	mlx_img_to_img(p, images, 0xFF000000);
 }
 
 int	cub_update(void *param)

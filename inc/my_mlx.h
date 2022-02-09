@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:07:58 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/09 16:32:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:49:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			my_mlx_area_put(t_img *d, t_vector p, t_vector dim, int c);
 /* Loads XPM image and fills t_img struct for it */
 void			mlx_load_img(void *ptr, t_img *i, char *path);
 
-/* Writes first img to second image to given pos, ignoring "c" pixels */
-void			mlx_img_to_img(int p[2], t_img img[2], int c1, int c2);
+/* Writes first img to second image to given pos, ignoring "c1" pixels */
+void			mlx_img_to_img(int p[2], t_img img[2], int c1);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 15:21:42 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:30:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 		if (j < ds)
 			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.ceiling);
 		else if (j >= ds && j < ((g->ray.height / 2) + wall_height))
-			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00000000);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00FFFFFF);
 		else
 			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
 	}

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 17:36:12 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:22:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define CUB3D_H
 
 # include "../libft/inc/libft.h"
+# include "keycodes.h"
 # include "../get_next_line/get_next_line.h"
 
 # include <mlx.h>
@@ -78,6 +79,7 @@ typedef struct s_player
 	float	oldx;
 	float	oldy;
 	char	dir;
+	float	speed;
 }				t_player;
 
 /* Struct to store all ray-casting-related data */

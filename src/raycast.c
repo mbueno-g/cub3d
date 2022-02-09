@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 18:59:09 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:47:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	init_ray(t_game *g)
 		g->ray.angle = 90;
 	else if (g->pl.dir == 'W')
 		g->ray.angle = 180;
-	if (g->pl.dir == 'N')
+	else if (g->pl.dir == 'N')
 		g->ray.angle = 270;
 	g->ray.oldangle = g->ray.angle;
 	g->ray.hfov = 30;
 	g->ray.width = WIN_W;
 	g->ray.height = WIN_H;
 	g->ray.incre_angle = 2 * g->ray.hfov / g->ray.width;
-	g->ray.precision = 20;
+	g->ray.precision = 100;
 	g->ray.lim = 100;
 }
 

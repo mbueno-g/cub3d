@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 14:23:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:41:45 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	cub_minimap(t_game *g)
 		xy[0] = -1;
 		while (++xy[0] < g->width)
 		{
-			if (g->map[xy[1]][xy[0]] == '1')
-				color = 0x008BB5F8;
-			else
+			if (g->map[xy[1]][xy[0]] != '1')
 				color = 0x005E5C64;
+			else
+				color = 0x008BB5F8;
 			my_mlx_area_put(&g->minimap, \
 				ft_newvector(xy[0] * SIZE, xy[1] * SIZE), \
 				ft_newvector(SIZE, SIZE), color);

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:12:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 
 int	cub_key(int k, void *param)
 {
-	t_game	*g;
-
-	g = param;
 	if (k == KEY_Q || k == KEY_ESC)
-		cub_perror(end, g, NULL, 1);
+		cub_perror(end, param, NULL, 1);
 	return (0);
 }
 
@@ -66,9 +63,9 @@ int	cub_mouse(int x, int y, void *param)
 
 	g = param;
 	if (x > g->mouse_x && y != -1)
-		g->ray.angle += 1;
+		g->ray.angle += 2;
 	else if (x < g->mouse_x && y != -1)
-		g->ray.angle -= 1;
+		g->ray.angle -= 2;
 	g->mouse_x = x;
 	return (0);
 }

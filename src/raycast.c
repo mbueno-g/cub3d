@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/10 09:46:51 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:22:28 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
 	x = g->pl.x + 0.5;
 	y = g->pl.y + 0.5;
-	my_mlx_area_put(&g->minimap, \
-		ft_newvector((int)x * SIZE, (int)y * SIZE), \
-		ft_newvector(SIZE, SIZE), 0x00FDD663);
 	while (g->map[(int)y][(int)x] != '1')
 	{
 		x += ray_cos;
@@ -54,7 +51,10 @@ float	distance_to_wall(t_game *g, float ray_angle)
 		else
 			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00BDC1C6);
 	}
-	d = sqrt((x - g->pl.x) * (x - g->pl.x) + (y - g->pl.y) * (y - g->pl.y));
+	my_mlx_area_put(&g->minimap, \
+		ft_newvector((int)(g->pl.x + 0.5) * SIZE, \
+		(int)(g->pl.y + 0.5) * SIZE), ft_newvector(SIZE, SIZE), 0x00FDD663);
+	d = sqrt(powf(x - g->pl.x - 0.5, 2.) + powf(y - g->pl.y - 0.5, 2.));
 	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
 	return (d);
 }

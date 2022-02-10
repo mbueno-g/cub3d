@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 21:35:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:46:51 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void	cub_raycast(t_game *g)
 		cub_draw(g, ray_count, dist);
 		ray_angle += g->ray.incre_angle;
 	}
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.i, 0, 0);
 }

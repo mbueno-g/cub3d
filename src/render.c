@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 16:50:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:49:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	cub_update(void *param)
 		cub_minimap(g);
 		cub_raycast(g);
 		redraw_elem(g, g->scope, WIN_W / 2, WIN_H / 2);
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, \
+			g->win_img.i, 0, 0);
 		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->minimap.i, \
 			WIN_W - (g->width * SIZE) - 10, WIN_H - (g->height * SIZE) - 10);
 	}

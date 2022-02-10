@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/09 14:36:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:55:43 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,53 @@ void	check_characters(int j, t_game *g)
 		cub_perror(inv_player, g, NULL, 1);
 }
 
+void check_around(t_game *g, int i, int j)
+{
+	if (j - 1 >= 0 && j - 1 < g->height)
+	{
+		// arriba [j-1][i]
+		if (g->map[j - 1][i] == '0')
+			cub_perror(inv_wall, g, NULL, 1);
+		if (i - 1 >= 0 && (i - 1) < (int) ft_strlen(g->map[j - 1]))
+		{
+			// [j-1][i-1] / izquierda [j][i-1]
+			if (g->map[j - 1][i - 1] == '0' || g->map[j][i - 1] == '0')
+				cub_perror(inv_wall, g, NULL, 1);
+			if (j + 1 >= 0 && j + 1 < g->height)
+			{
+				// abajo [j+1][i], [j + 1][i - 1]
+				if (g->map[j + 1][i] == '0' || g->map[j + 1][i - 1] == '0')
+					cub_perror(inv_wall, g, NULL, 1);
+			}
+		}
+		if (i + 1 >= 0 && (i + 1) < (int) ft_strlen(g->map[j - 1]))
+		{
+			// derecha [j][i+1] / [j-1][i+1]
+			if (g->map[j - 1][i + 1] == '0' || g->map[j][i + 1] == '0')
+				cub_perror(inv_wall, g, NULL, 1);
+			if (j + 1 >= 0 && j + 1 < g->height)
+			{
+				// [j + 1][i + 1]
+				if (g->map[j + 1][i + 1] == '0')
+					cub_perror(inv_wall, g, NULL, 1);
+			}
+		}
+	}
+}
+
+
+void check_walls(t_game *g, int j)
+{
+	int	i;
+	
+	i = -1;
+	while (++i < (int) ft_strlen(g->map[j]))
+	{
+		if (g->map[j][i] == ' ')
+			check_around(g, i, j);
+	}
+}
+
 void	check_map(char *file, t_game *g)
 {
 	int	j;
@@ -102,12 +149,13 @@ void	check_map(char *file, t_game *g)
 			cub_perror(inv_map, g, NULL, 1);
 		while (ft_isspace(g->map[j][i]) && i < w)
 			i++;
-		if ((j == 0 || j == g->height - 1) && w - i - \
+		if ((j == 0 || j == g->height - 1) && w - ft_countchar(g->map[j], ' ') - \
 			ft_countchar(g->map[j], '1'))
 			cub_perror(inv_wall, g, NULL, 1);
 		else if (g->map[j][i] != '1' || g->map[j][w - 1] != '1')
 			cub_perror(inv_wall, g, NULL, 1);
-		check_characters(j, g);
+		check_walls(g, j);
+		//check_characters(j, g);
 		j++;
 	}
 	cub_perror(inv_map, g, NULL, !j);

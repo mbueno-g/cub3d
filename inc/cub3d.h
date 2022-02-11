@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 12:17:19 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 14:54:48 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,8 @@ int		cub_update(void *param);
 
 /* Checks if there're c's in position range [n0,n1] of m */
 int		checkcn(char *m, char c, int n0, int n1);
+
+/* Check every element of the map: spaces + characters */
+void	check_elements(t_game *g, int j);
 
 #endif

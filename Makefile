@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/09 15:43:26 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/02/11 12:23:55 by mbueno-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -
 
 SRC = main.c map.c error.c color.c	\
 	  minimap.c raycast.c render.c	\
-	  utils.c game.c my_mlx.c $(END)
+	  utils.c game.c my_mlx.c parse_map.c $(END)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 14:54:48 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 18:07:33 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ typedef struct s_ray
 	int		height;
 	float	lim;
 	int		precision;
+	float	x;
+	float	y;
 }				t_ray;
 
 /* Handles most game attributes */

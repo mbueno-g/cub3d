@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 17:55:17 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:17:32 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,34 @@ float	distance_to_wall(t_game *g, float ray_angle)
 		else
 			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00BDC1C6);
 	}
+	g->ray.x = x;
+	g->ray.y = y;
 	my_mlx_area_put(&g->minimap, ft_newvector((int)(g->pl.x + 0.5) * SIZE, \
 		(int)(g->pl.y + 0.5) * SIZE), ft_newvector(SIZE, SIZE), 0x00FDD663);
 	d = sqrt(powf(x - g->pl.x - 0.5, 2.) + powf(y - g->pl.y - 0.5, 2.));
 	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
 	return (d);
+}
+
+void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height)
+{
+	int	posx;
+	int	dy;
+	int	y[2];
+	int	z;
+	int	color;
+
+	posx = (int) (i.width * (g->ray.x + g->ray.y)) % i.width;
+	dy = (wall_height * 2) / i.height;
+	y[0] = (g->ray.height / 2) - wall_height;
+	z = -1;
+	while (++z < i.height)
+	{
+		y[1] = y[0] + dy;
+		color = my_mlx_pixel_get(&i, posx, z);
+		mlx_draw_vline(g->win_img, ray_count, y, color);
+		y[0] += dy;
+	}
 }
 
 void	cub_draw(t_game *g, int ray_count, float dis)
@@ -69,10 +92,8 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 	j[0] = 0;
 	j[1] = ds;
 	mlx_draw_vline(g->win_img, ray_count, j, g->tex.ceiling);
-	j[0] = j[1];
-	j[1] = ((g->ray.height / 2) + wall_height);
-	mlx_draw_vline(g->win_img, ray_count, j, 0x00000000);
-	j[0] = j[1];
+	draw_texture(g, g->tex.n, ray_count, wall_height);
+	j[0] = (g->ray.height / 2) + wall_height;
 	j[1] = g->ray.height;
 	mlx_draw_vline(g->win_img, ray_count, j, g->tex.floor);
 }

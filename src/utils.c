@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 16:29:00 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:17:11 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,18 @@ float	degree_to_radians(float degree)
 {
 	return (degree * M_PI / 180);
 }
+
+int checkcn(char *m, char c, int n0, int n1)
+{
+	int	i;
+
+	i = n0;
+	while (i >=0 && i < n1 && i < (int) ft_strlen(m))
+	{
+		if (m[i] != c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+

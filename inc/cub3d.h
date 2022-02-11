@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 15:59:57 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:17:19 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,8 @@ void	cub_raycast(t_game *g);
 
 /* Function called inside mlx loop */
 int		cub_update(void *param);
+
+/* Checks if there're c's in position range [n0,n1] of m */
+int		checkcn(char *m, char c, int n0, int n1);
 
 #endif

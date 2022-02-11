@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 15:52:25 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:29:50 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	check_elements(t_game *g, int j)
 		len0 = ft_strlen(g->map[j]);
 		len1 = ft_strlen(g->map[j + 1]);
 		if (len0 - len1 < 0)
-			b = checkcn(g->map[j + 1], '1', len0 - 1 , len1 - 1);
+			b = checkcn(g->map[j + 1], '1', len0 - 1, len1 - 1);
 		else if (len0 - len1 > 0)
 			b = checkcn(g->map[j], '1', len1 - 1, len0 - 1);
 		cub_perror(inv_wall, g, NULL, b);

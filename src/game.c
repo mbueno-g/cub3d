@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 15:23:30 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:29:13 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ void	move_pl(int k, t_game *g, float ray_cos, float ray_sin)
 		angle = g->ray.angle + 90;
 	ray_cos = cos(degree_to_radians(angle)) * g->pl.speed;
 	ray_sin = sin(degree_to_radians(angle)) * g->pl.speed;
-	if (g->map[(int)(g->pl.y + ray_sin + 0.5)][(int)(g->pl.x + 0.5)] != '1')
-		g->pl.y += ray_sin;
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + ray_cos + 0.5)] != '1')
-		g->pl.x += ray_cos;
+	if ((int)(g->pl.y + ray_sin + 0.5) < g->height && (int)(g->pl.x + 0.5) < \
+		(int)ft_strlen(g->map[(int)(g->pl.y + ray_sin + 0.5)]))
+	{
+		if (g->map[(int)(g->pl.y + ray_sin + 0.5)][(int)(g->pl.x + 0.5)] != '1')
+			g->pl.y += ray_sin;
+	}
+	if ((int)(g->pl.y + 0.5) < g->height && (int)(g->pl.x + ray_cos + 0.5) < \
+		(int)ft_strlen(g->map[(int)(g->pl.y + 0.5)]))
+	{
+		if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + ray_cos + 0.5)] != '1')
+			g->pl.x += ray_cos;
+	}
 }
 
 int	cub_keydown(int k, void *param)

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/10 17:22:28 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/11 17:55:17 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ float	distance_to_wall(t_game *g, float ray_angle)
 		else
 			my_mlx_pixel_put(&g->minimap, x * SIZE, y * SIZE, 0x00BDC1C6);
 	}
-	my_mlx_area_put(&g->minimap, \
-		ft_newvector((int)(g->pl.x + 0.5) * SIZE, \
+	my_mlx_area_put(&g->minimap, ft_newvector((int)(g->pl.x + 0.5) * SIZE, \
 		(int)(g->pl.y + 0.5) * SIZE), ft_newvector(SIZE, SIZE), 0x00FDD663);
 	d = sqrt(powf(x - g->pl.x - 0.5, 2.) + powf(y - g->pl.y - 0.5, 2.));
 	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
@@ -63,20 +62,19 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 {
 	int	wall_height;
 	int	ds;
-	int	j;
+	int	j[2];
 
 	wall_height = (int)(g->ray.height / (2 * dis));
 	ds = (g->ray.height / 2) - wall_height;
-	j = -1;
-	while (++j < g->ray.height)
-	{
-		if (j < ds)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.ceiling);
-		else if (j >= ds && j < ((g->ray.height / 2) + wall_height))
-			my_mlx_pixel_put(&g->win_img, ray_count, j, 0x00000000);
-		else
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
-	}
+	j[0] = 0;
+	j[1] = ds;
+	mlx_draw_vline(g->win_img, ray_count, j, g->tex.ceiling);
+	j[0] = j[1];
+	j[1] = ((g->ray.height / 2) + wall_height);
+	mlx_draw_vline(g->win_img, ray_count, j, 0x00000000);
+	j[0] = j[1];
+	j[1] = g->ray.height;
+	mlx_draw_vline(g->win_img, ray_count, j, g->tex.floor);
 }
 
 void	cub_raycast(t_game *g)

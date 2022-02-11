@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/10 20:56:01 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:20:50 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	g = cub_init();
 	check_map(argv[1], &g);
-	//game_init(&g);
+	game_init(&g);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/10 16:41:45 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:47:31 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cub_minimap(t_game *g)
 	while (++xy[1] < g->height)
 	{
 		xy[0] = -1;
-		while (++xy[0] < g->width)
+		while (++xy[0] < (int) ft_strlen(g->map[xy[1]]))
 		{
 			if (g->map[xy[1]][xy[0]] != '1')
 				color = 0x005E5C64;

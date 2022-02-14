@@ -5,7 +5,7 @@
 🚧 WIP: Magic under development 🚧
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/153291694-ee68386a-ddaa-46f7-8a0a-1bd01dc0d259.gif">
+    <img src="https://user-images.githubusercontent.com/40824677/153962176-0c2539c4-0c43-4a2e-9797-c67310eb6ce5.gif">
 </p>
 
 <!--

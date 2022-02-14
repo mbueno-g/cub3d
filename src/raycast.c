@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 19:06:30 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:53:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height)
 	{
 		color = my_mlx_pixel_get(&i, (int)(i.width * (g->x + g->y)) \
 			% i.width, z);
+		color = get_dist_color(color, ds);
 		cy[0] = cy[1];
 		while (cy[0] < cy[1] + dy)
 		{
@@ -92,9 +93,11 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 	while (++j < WIN_H)
 	{
 		if (j < ds)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.ceiling);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, \
+				get_dist_color(g->tex.ceiling, j));
 		else if (j >= (WIN_H / 2) + wall_height)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
+			my_mlx_pixel_put(&g->win_img, ray_count, j, \
+				get_dist_color(g->tex.floor, WIN_H - j));
 	}
 	draw_texture(g, g->tex.n, ray_count, wall_height);
 }

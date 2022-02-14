@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 18:50:12 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:53:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ int		cub_atoi(const char *nptr, short *nbr);
 
 /* Fills color int for floor and ceiling */
 void	get_cf_color(char **dir, t_game *g);
+
+/* Drecreases RGB value of color as object gets further */
+int		get_dist_color(int color, float ds);
 
 /* Frees all necessary things before exiting */
 void	cub_end(t_game *g);

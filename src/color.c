@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:43:33 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/07 22:50:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:52:13 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 int	create_trgb(t_color c)
 {
 	return (c.t << 24 | c.r << 16 | c.g << 8 | c.b);
+}
+
+t_color	create_rgbt(int col)
+{
+	t_color	c;
+
+	c.t = (col >> 24) & 0xFF;
+	c.r = (col >> 16) & 0xFF;
+	c.g = (col >> 8) & 0xFF;
+	c.b = col & 0xFF;
+	return (c);
 }
 
 void	get_cf_color(char **dir, t_game *g)
@@ -38,4 +49,26 @@ void	get_cf_color(char **dir, t_game *g)
 		g->tex.floor = create_trgb(aux);
 	else
 		g->tex.ceiling = create_trgb(aux);
+}
+
+int	get_dist_color(int color, float ds)
+{
+	t_color	c;
+
+	if (ds < 0)
+		ds = 0;
+	c = create_rgbt(color);
+	c.t -= (powf(ds / 2, 1.02));
+	c.r -= (powf(ds / 2, 1.02));
+	c.g -= (powf(ds / 2, 1.02));
+	c.b -= (powf(ds / 2, 1.02));
+	if (c. t < 0)
+		c.t = 0;
+	if (c.r < 0)
+		c.r = 0;
+	if (c.g < 0)
+		c.g = 0;
+	if (c.b < 0)
+		c.b = 0;
+	return (create_trgb(c));
 }

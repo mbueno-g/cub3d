@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 14:50:45 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:58:18 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	redraw_elem(t_game *g, t_img img, int x, int y)
 	int		p[2];
 	t_img	images[2];
 
-	p[0] = x - (img.width / 2);
-	p[1] = y - (img.height / 2);
+	p[0] = x;
+	p[1] = y;
 	images[0] = img;
 	images[1] = g->win_img;
 	mlx_img_to_img(p, images, 0xFF000000);
@@ -38,10 +38,11 @@ int	cub_update(void *param)
 		cub_minimap(g);
 		cub_raycast(g);
 		cub_miniview(g);
-		redraw_elem(g, g->scope, WIN_W / 2, WIN_H / 2);
+		redraw_elem(g, g->scope, WIN_W / 2 - g->scope.width / 2, \
+			WIN_H / 2 - g->scope.height / 2);
+		redraw_elem(g, g->miniview, WIN_W - g->miniview.width - 20, \
+			WIN_H - g->miniview.height - 20);
 		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.i, 0, 0);
-		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->miniview.i, \
-			WIN_W - (20 * SIZE) - 10, WIN_H - (20 * SIZE) - 10);
 	}
 	g->nframes++;
 	return (0);

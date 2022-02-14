@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:13:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/14 17:18:01 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:59:40 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ void	mlx_img_to_img(int p[2], t_img img[2], int c1)
 		xy[0] = -1;
 		while (++xy[0] < img[0].width)
 		{
-			color = my_mlx_pixel_get(&img[0], xy[0], xy[1]);
-			if (color != c1)
-				my_mlx_pixel_put(&img[1], xy[0] + p[0], xy[1] + p[1], color);
+			if (xy[0] + p[0] >= 0 && xy[1] + p[1] >= 0)
+			{
+				color = my_mlx_pixel_get(&img[0], xy[0], xy[1]);
+				if (color != c1)
+					my_mlx_pixel_put(&img[1], xy[0] + p[0], \
+						xy[1] + p[1], color);
+			}
 		}
 	}
 }

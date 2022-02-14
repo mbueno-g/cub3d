@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 14:23:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:29:45 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 	int	ds;
 	int	j;
 
-	wall_height = (int)(g->ray.height / (2 * dis));
+	wall_height = (int)(g->ray.height / (1.5 * dis));
 	ds = (g->ray.height / 2) - wall_height;
 	j = -1;
 	while (++j < g->ray.height)

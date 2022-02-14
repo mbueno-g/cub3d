@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 14:53:55 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/14 18:50:12 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ typedef struct s_ray
 	float	angle;
 	float	oldangle;
 	float	hfov;
-	int		width;
-	int		height;
-	float	lim;
 	int		precision;
 }				t_ray;
 

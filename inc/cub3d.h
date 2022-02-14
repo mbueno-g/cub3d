@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 20:21:51 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:53:55 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,13 @@ typedef struct s_game
 	void		*win_ptr;
 	t_img		win_img;
 	t_img		minimap;
+	t_img		miniview;
 	t_img		scope;
 	t_tex		tex;
 	t_ray		ray;
 	t_player	pl;
-	float	x;
-	float	y;
+	float		x;
+	float		y;
 }				t_game;
 
 /* Check possible map errors */
@@ -151,8 +152,11 @@ void	init_ray(t_game *g);
 /* Converts degrees to radians */
 float	degree_to_radians(float degree);
 
-/* Draws a 2D minimap at the bottom right of the screen */
+/* Draws a 2D minimap */
 void	cub_minimap(t_game *g);
+
+/* Draws a section of the 2D minimap */
+void	cub_miniview(t_game *g);
 
 /* Function to shoot rays in a given direction to find walls */
 void	cub_raycast(t_game *g);

@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/11 12:23:55 by mbueno-g         ###   ########.fr        #
+#    Updated: 2022/02/14 11:29:10 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ WIDTH=1080
 HEIGHT=720
 WW=WIN_W=$(WIDTH)
 WH=WIN_H=$(HEIGHT)
-SZ=SIZE=10
+SZ=SIZE=15
 WIN_SIZE = -D $(WW) -D $(WH) -D $(SZ)
 
 # Keycodes defined during compilation

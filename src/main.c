@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 15:20:50 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:55:09 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static t_game	cub_init(void)
 	g.win_ptr = NULL;
 	g.win_img.i = NULL;
 	g.minimap.i = NULL;
+	g.miniview.i = NULL;
 	g.mlx_ptr = mlx_init();
 	g.tex.n.i = NULL;
 	g.tex.s.i = NULL;
@@ -52,7 +53,6 @@ static t_game	cub_init(void)
 	g.pl.x = -1;
 	g.pl.y = -1;
 	g.pl.speed = 0.06;
-	g.mouse_x = 0;
 	mlx_load_img(g.mlx_ptr, &g.scope, "textures/scope.xpm");
 	return (g);
 }

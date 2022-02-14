@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 20:29:13 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:45:52 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ int	cub_mouse(int x, int y, void *param)
 void	game_init(t_game *g)
 {
 	g->win_ptr = mlx_new_window(g->mlx_ptr, WIN_W, WIN_H, ":)");
+	g->minimap.i = mlx_new_image(g->mlx_ptr, g->width * SIZE, \
+		g->height * SIZE);
+	g->minimap.addr = mlx_get_data_addr(g->minimap.i, &g->minimap.bpp, \
+		&g->minimap.line_len, &g->minimap.endian);
+	g->miniview.i = mlx_new_image(g->mlx_ptr, 20 * SIZE, 20 * SIZE);
+	g->miniview.addr = mlx_get_data_addr(g->miniview.i, &g->miniview.bpp, \
+		&g->miniview.line_len, &g->miniview.endian);
 	init_ray(g);
 	mlx_hook(g->win_ptr, 17, 0, cub_exit, g);
 	mlx_hook(g->win_ptr, 02, 1L << 0, cub_keydown, g);

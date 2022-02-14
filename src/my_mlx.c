@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:13:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 19:14:40 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:54:26 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ void	my_mlx_area_put(t_img *d, t_vector p, t_vector dim, int c)
 		while (++x < dim.x)
 			my_mlx_pixel_put(d, p.x + x, p.y + y, c);
 	}
-}
-
-void	mlx_load_img(void *ptr, t_img *i, char *path)
-{
-	i->i = mlx_xpm_file_to_image(ptr, path, &i->width, &i->height);
-	i->addr = mlx_get_data_addr(i->i, &i->bpp, &i->line_len, &i->endian);
 }
 
 void	mlx_img_to_img(int p[2], t_img img[2], int c1)

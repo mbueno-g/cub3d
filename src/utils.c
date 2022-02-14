@@ -6,11 +6,17 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 14:35:27 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:54:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	mlx_load_img(void *ptr, t_img *i, char *path)
+{
+	i->i = mlx_xpm_file_to_image(ptr, path, &i->width, &i->height);
+	i->addr = mlx_get_data_addr(i->i, &i->bpp, &i->line_len, &i->endian);
+}
 
 int	cub_atoi(const char *nptr, short *nbr)
 {

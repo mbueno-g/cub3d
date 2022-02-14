@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:07:58 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 19:15:03 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:53:16 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void			mlx_load_img(void *ptr, t_img *i, char *path);
 void			mlx_img_to_img(int p[2], t_img img[2], int c1);
 
 /* Draws a vertical line: width = i, height = [j[0],j[1]) */
-void	mlx_draw_vline(t_img img, int i, int j[2], int color);
+void			mlx_draw_vline(t_img img, int i, int j[2], int color);
 
 #endif

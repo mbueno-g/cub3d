@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/11 20:28:05 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:23:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ void	cub_raycast(t_game *g)
 	int		ray_count;
 	float	dist;
 
-	ray_angle = g->ray.angle - g->ray.hfov;
-	ray_count = -1;
 	if (g->win_img.i)
 		mlx_destroy_image(g->mlx_ptr, g->win_img.i);
 	g->win_img.i = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
 	g->win_img.addr = mlx_get_data_addr(g->win_img.i, &g->win_img.bpp, \
 		&g->win_img.line_len, &g->win_img.endian);
+	ray_angle = g->ray.angle - g->ray.hfov;
+	ray_count = -1;
 	while (++ray_count < g->ray.width)
 	{
 		dist = distance_to_wall(g, ray_angle);

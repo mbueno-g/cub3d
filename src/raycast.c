@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 19:04:54 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:06:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,44 +53,42 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	return (d);
 }
 
-void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height, float ds)
+void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height)
 {
 	float	dy;
-	float	y;
-	int	z;
-	int	color;
-	float c;
+	float	ds;
+	float	cy[2];
+	int		z;
+	int		color;
 
-	dy = ((float) wall_height * 2)/ (float) i.height;
-	y = ds;
+	dy = ((float)wall_height * 2) / (float)i.height;
+	ds = ((float)WIN_H / 2) - (float)wall_height;
+	cy[1] = ds;
 	z = -1;
 	while (++z < i.height)
 	{
 		color = my_mlx_pixel_get(&i, (int)(i.width * (g->x + g->y)) \
 			% i.width, z);
-		c = y;
-		while (c < y + dy)
+		cy[0] = cy[1];
+		while (cy[0] < cy[1] + dy)
 		{
-			my_mlx_pixel_put(&g->win_img, ray_count, c, color);
-			c++;
+			if (cy[0] >= 0 && cy[0] < (float)WIN_H)
+				my_mlx_pixel_put(&g->win_img, ray_count, cy[0], color);
+			cy[0]++;
 		}
-		y += dy;
+		cy[1] += dy;
 	}
 }
 
 void	cub_draw(t_game *g, int ray_count, float dis)
 {
-	int	wall_height;
-	float ds;
-	int	j;
-	int	pos;
-	int i;
+	int		wall_height;
+	float	ds;
+	int		j;
 
-	wall_height = (int)(WIN_H / (2 * dis));
-	ds = (float) (WIN_H / 2) -  (float) wall_height;
+	wall_height = (int)(WIN_H / (1.5 * dis));
+	ds = ((float)WIN_H / 2) - (float)wall_height;
 	j = -1;
-	i = 0;
-	pos = g->tex.n.height / ((WIN_H / 2) + wall_height - ds);
 	while (++j < WIN_H)
 	{
 		if (j < ds)
@@ -98,9 +96,7 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 		else if (j >= (WIN_H / 2) + wall_height)
 			my_mlx_pixel_put(&g->win_img, ray_count, j, g->tex.floor);
 	}
-	printf("%f\n", (float) ds);
-	if (ds > 0)
-		draw_texture(g, g->tex.n, ray_count, wall_height, ds);
+	draw_texture(g, g->tex.n, ray_count, wall_height);
 }
 
 void	cub_raycast(t_game *g)

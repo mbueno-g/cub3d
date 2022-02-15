@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 22:57:48 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/15 09:29:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	cub_miniview(t_game *g)
 	int	aux[2];
 
 	aux[1] = -1;
-	xy[1] = (g->pl.y + 0.5 - 7.5) * SIZE;
-	while (++aux[1] < (15 * SIZE))
+	xy[1] = (g->pl.y + 0.5) * SIZE - (int)(g->miniview.height / 2);
+	while (++aux[1] < (g->miniview.height))
 	{
 		aux[0] = -1;
-		xy[0] = (g->pl.x + 0.5 - 15) * SIZE;
-		while (++aux[0] < (30 * SIZE))
+		xy[0] = (g->pl.x + 0.5) * SIZE - (int)(g->miniview.width / 2);
+		while (++aux[0] < g->miniview.width)
 		{
 			if (xy[1] >= 0 && xy[1] < (g->height * SIZE) && xy[0] >= 0 \
 						&& xy[0] < (g->width * SIZE))

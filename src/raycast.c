@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 21:53:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/15 14:58:18 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	cub_draw(t_game *g, int ray_count, float dis)
 			my_mlx_pixel_put(&g->win_img, ray_count, j, \
 				get_dist_color(g->tex.floor, WIN_H - j));
 	}
-	draw_texture(g, g->tex.n, ray_count, wall_height);
+	draw_texture(g, get_texture(g), ray_count, wall_height);
 }
 
 void	cub_raycast(t_game *g)

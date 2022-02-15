@@ -6,11 +6,22 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/14 22:58:18 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/15 14:57:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+t_img	get_texture(t_game *g)
+{
+	if (g->x > (int)g->x && (int)g->y + 1 - g->y < 1)
+		return (g->tex.s);
+	if (g->x > (int)g->x)
+		return (g->tex.n);
+	if (g->y > (int)g->y && (int)g->x + 1 - g->x < 1)
+		return (g->tex.w);
+	return (g->tex.e);
+}
 
 void	redraw_elem(t_game *g, t_img img, int x, int y)
 {

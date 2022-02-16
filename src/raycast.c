@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 18:02:33 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:42:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
 	g->x = g->pl.x + 0.5;
 	g->y = g->pl.y + 0.5;
-	while (g->map[(int)g->y][(int)g->x] != '1')
+	while (g->map[(int)g->y][(int)g->x] != '1' && \
+		sqrt(powf(g->x - g->pl.x - 0.5, 2.) + \
+		powf(g->y - g->pl.y - 0.5, 2.)) < g->ray.lim)
 	{
 		g->x += ray_cos;
 		g->y += ray_sin;
@@ -53,7 +55,7 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	return (d);
 }
 
-void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height)
+void	draw_texture(t_game *g, t_img *i, int ray_count, int wall_height)
 {
 	float	dy;
 	float	ds;
@@ -61,14 +63,14 @@ void	draw_texture(t_game *g, t_img i, int ray_count, int wall_height)
 	int		z;
 	int		color;
 
-	dy = ((float)wall_height * 2) / (float)i.height;
+	dy = ((float)wall_height * 2) / (float)i->height;
 	ds = ((float)WIN_H / 2) - (float)wall_height;
 	cy[1] = ds;
 	z = -1;
-	while (++z < i.height)
+	while (++z < i->height)
 	{
-		color = my_mlx_pixel_get(&i, (int)(i.width * (g->x + g->y)) \
-			% i.width, z);
+		color = my_mlx_pixel_get(i, (int)(i->width * (g->x + g->y)) \
+			% i->width, z);
 		color = get_dist_color(color, ds);
 		cy[0] = cy[1];
 		while (cy[0] < cy[1] + dy)

@@ -6,15 +6,23 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 20:32:54 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:51:07 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+void	get_anim(t_img *img, t_list **anim, int *num)
+{
+	if (num && anim && img && *anim && ft_lstsize(*anim))
+		(*num)--;
+	ft_lstadd_back(anim, ft_lstnew(img));
+}
+
 void	check_textures(char *trim, t_game *g, int *num)
 {
 	char	**dir;
+	t_img	*i;
 
 	dir = ft_split(trim, ' ');
 	if (!dir)
@@ -22,14 +30,16 @@ void	check_textures(char *trim, t_game *g, int *num)
 		free(trim);
 		cub_perror(no_memory, g, NULL, 1);
 	}
-	else if (!ft_strncmp(dir[0], "NO", 3))
-		mlx_load_img(g->mlx_ptr, &g->tex.n, dir[1], num);
+	if (ft_strncmp(dir[0], "F", 2) && ft_strncmp(dir[0], "C", 2))
+		i = mlx_load_img(g->mlx_ptr, dir[1]);
+	if (!ft_strncmp(dir[0], "NO", 3))
+		get_anim(i, &g->tex.n, num);
 	else if (!ft_strncmp(dir[0], "SO", 3))
-		mlx_load_img(g->mlx_ptr, &g->tex.s, dir[1], num);
+		get_anim(i, &g->tex.s, num);
 	else if (!ft_strncmp(dir[0], "EA", 3))
-		mlx_load_img(g->mlx_ptr, &g->tex.e, dir[1], num);
+		get_anim(i, &g->tex.e, num);
 	else if (!ft_strncmp(dir[0], "WE", 3))
-		mlx_load_img(g->mlx_ptr, &g->tex.w, dir[1], num);
+		get_anim(i, &g->tex.w, num);
 	else if (!ft_strncmp(dir[0], "F", 2) || !ft_strncmp(dir[0], "C", 2))
 		get_cf_color(dir, g);
 	ft_free_matrix(&dir);
@@ -57,8 +67,8 @@ void	read_map(char *file, t_game *g)
 		free(line[1]);
 	}
 	cub_perror(empty_file, g, NULL, !num);
-	cub_perror(inv_tex, g, NULL, !g->tex.n.i || !g->tex.s.i || !g->tex.e.i || \
-		!g->tex.w.i || g->tex.floor == -1 || g->tex.ceiling == -1);
+	cub_perror(inv_tex, g, NULL, !g->tex.n || !g->tex.s || !g->tex.e || \
+		!g->tex.w || g->tex.floor == -1 || g->tex.ceiling == -1);
 	g->height = ft_matrixlen(g->map);
 }
 

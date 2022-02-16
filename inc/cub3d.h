@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 20:21:19 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:59:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,15 @@ typedef struct s_color
 /* Every image corresponding to a wall texture, plus floor and ceiling */
 typedef struct s_tex
 {
-	t_img	n;
-	t_img	s;
-	t_img	w;
-	t_img	e;
-	t_img	b;
+	t_list	*n;
+	t_list	*n_bak;
+	t_list	*s;
+	t_list	*s_bak;
+	t_list	*w;
+	t_list	*w_bak;
+	t_list	*e;
+	t_list	*e_bak;
+	t_img	*b;
 	int		floor;
 	int		ceiling;
 }				t_tex;
@@ -92,6 +96,7 @@ typedef struct s_ray
 	float	angle;
 	float	oldangle;
 	float	hfov;
+	float	lim;
 	int		precision;
 }				t_ray;
 
@@ -103,13 +108,14 @@ typedef struct s_game
 	int			height;
 	int			width;
 	int			mouse_x;
+	int			rate;
 	long		nframes;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		win_img;
 	t_img		minimap;
 	t_img		miniview;
-	t_img		scope;
+	t_img		*scope;
 	t_tex		tex;
 	t_ray		ray;
 	t_player	pl;
@@ -175,6 +181,6 @@ int		checkcn(char *m, char c, int n0, int n1);
 void	check_elements(t_game *g, int j);
 
 /* Checks which wall has been hit to choose proper texture */
-t_img	get_texture(t_game *g);
+t_img	*get_texture(t_game *g);
 
 #endif

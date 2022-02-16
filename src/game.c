@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 17:39:49 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 00:01:06 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void	game_init(t_game *g)
 		&g->miniview.line_len, &g->miniview.endian);
 	g->miniview.width = 30 * SIZE;
 	g->miniview.height = 15 * SIZE;
+	g->tex.n_bak = g->tex.n;
+	g->tex.s_bak = g->tex.s;
+	g->tex.e_bak = g->tex.e;
+	g->tex.w_bak = g->tex.w;
 	init_ray(g);
 	mlx_hook(g->win_ptr, 17, 0, cub_exit, g);
 	mlx_hook(g->win_ptr, 02, 1L << 0, cub_keydown, g);

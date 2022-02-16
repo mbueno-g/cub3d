@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 20:33:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 00:07:10 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ void	init_sprites(t_game *g)
 	g->win_img.i = NULL;
 	g->minimap.i = NULL;
 	g->miniview.i = NULL;
-	g->scope.i = NULL;
-	g->tex.n.i = NULL;
-	g->tex.s.i = NULL;
-	g->tex.e.i = NULL;
-	g->tex.w.i = NULL;
-	g->tex.b.i = NULL;
-	mlx_load_img(g->mlx_ptr, &g->scope, "textures/scope.xpm", NULL);
-	mlx_load_img(g->mlx_ptr, &g->tex.b, "textures/black.xpm", NULL);
+	g->tex.n = NULL;
+	g->tex.s = NULL;
+	g->tex.e = NULL;
+	g->tex.w = NULL;
+	g->tex.b = mlx_load_img(g->mlx_ptr, "textures/black.xpm");
+	g->scope = mlx_load_img(g->mlx_ptr, "textures/scope.xpm");
 }
 
 static t_game	cub_init(void)
@@ -60,6 +58,9 @@ static t_game	cub_init(void)
 	g.pl.x = -1;
 	g.pl.y = -1;
 	g.pl.speed = 0.12;
+	g.ray.lim = 10;
+	g.mouse_x = 0;
+	g.rate = 100;
 	return (g);
 }
 

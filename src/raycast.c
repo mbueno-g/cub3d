@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 16:32:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:02:33 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_ray(t_game *g)
 	g->ray.oldangle = g->ray.angle;
 	g->ray.hfov = 30;
 	g->ray.incre_angle = 2 * g->ray.hfov / WIN_W;
-	g->ray.precision = 100;
+	g->ray.precision = 300;
 }
 
 float	distance_to_wall(t_game *g, float ray_angle)

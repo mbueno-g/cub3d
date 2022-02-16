@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/15 14:58:07 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:28:03 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_tex
 	t_img	s;
 	t_img	w;
 	t_img	e;
+	t_img	b;
 	int		floor;
 	int		ceiling;
 }				t_tex;

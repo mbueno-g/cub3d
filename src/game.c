@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 16:37:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 17:39:49 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	move_pl(int k, t_game *g, float ray_cos, float ray_sin)
 		angle = g->ray.angle + 90;
 	ray_cos = cos(degree_to_radians(angle)) * g->pl.speed;
 	ray_sin = sin(degree_to_radians(angle)) * g->pl.speed;
-	if (g->map[(int)(g->pl.y + 0.5 + ray_sin)][(int)(g->pl.x + 0.5)] != '1')
+	if (g->map[(int)(g->pl.y + 0.5 + \
+			(5 * ray_sin))][(int)(g->pl.x + 0.5)] != '1')
 		g->pl.y += ray_sin;
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5 + ray_cos)] != '1')
+	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5 + \
+			(5 * ray_cos))] != '1')
 		g->pl.x += ray_cos;
 }
 

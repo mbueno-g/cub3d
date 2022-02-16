@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 14:51:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:02:57 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 t_img	get_texture(t_game *g)
 {
-	if (g->x >= (int)g->x && g->x <= (int)g->x + 1 && \
-		g->y - (int)g->y < 0.01)
+	float	small;
+
+	small = 0.004;
+	if (g->y - (int)g->y < small && \
+		g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
 		return (g->tex.n);
-	if (g->x >= (int)g->x && g->x <= (int)g->x + 1 && \
-		(int)g->y + 1 - g->y < 0.01)
+	if ((int)g->y + 1 - g->y < small && \
+		g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
 		return (g->tex.s);
-	if (g->y >= (int)g->y && g->y <= (int)g->y + 1 && \
-		g->x - (int)g->x < 0.01)
+	if (g->x - (int)g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
 		return (g->tex.w);
-	return (g->tex.e);
+	if ((int)g->x + 1 - g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
+		return (g->tex.e);
+	return (g->tex.b);
 }
 
 void	redraw_elem(t_game *g, t_img img, int x, int y)

@@ -6,12 +6,11 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 16:36:26 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:02:21 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include <mlx.h>
 
 static void	check_file(int argc, char **argv)
 {
@@ -47,13 +46,13 @@ static t_game	cub_init(void)
 	g.tex.s.i = NULL;
 	g.tex.e.i = NULL;
 	g.tex.w.i = NULL;
-	g.scope.i = NULL;
 	g.tex.floor = -1;
 	g.tex.ceiling = -1;
 	g.pl.x = -1;
 	g.pl.y = -1;
 	g.pl.speed = 0.12;
 	mlx_load_img(g.mlx_ptr, &g.scope, "textures/scope.xpm");
+	mlx_load_img(g.mlx_ptr, &g.tex.b, "textures/black.xpm");
 	return (g);
 }
 

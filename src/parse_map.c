@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/11 20:29:50 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/16 19:20:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_walls(t_game *g, int i, int j)
 	{
 		if (g->map[j - 1][i] == '0')
 			cub_perror(inv_wall, g, NULL, 1);
-		if (i - 1 >= 0 && (i - 1) < (int) ft_strlen(g->map[j - 1]))
+		if (i - 1 >= 0 && (i - 1) < (int)ft_strlen(g->map[j - 1]))
 		{
 			if ((g->map[j - 1][i - 1] == '0' || g->map[j][i - 1] == '0'))
 				cub_perror(inv_wall, g, NULL, 1);
@@ -28,7 +28,7 @@ void	check_walls(t_game *g, int i, int j)
 					cub_perror(inv_wall, g, NULL, 1);
 			}
 		}
-		if (i + 1 >= 0 && (i + 1) < (int) ft_strlen(g->map[j - 1]))
+		if (i + 1 >= 0 && (i + 1) < (int)ft_strlen(g->map[j - 1]))
 		{
 			if (g->map[j - 1][i + 1] == '0' || g->map[j][i + 1] == '0')
 				cub_perror(inv_wall, g, NULL, 1);

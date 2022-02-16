@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 17:28:03 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:21:19 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ typedef struct s_game
 }				t_game;
 
 /* Check possible map errors */
-void	check_map(char *file, t_game *g);
+void	check_map(t_game *g);
+
+/* Reads file with gnl */
+void	read_map(char *file, t_game *g);
 
 /* Prints appropriate error message and exits, freeing everything */
 int		cub_perror(t_cub_err err, t_game *g, char *param, int c);

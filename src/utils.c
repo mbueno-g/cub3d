@@ -6,14 +6,27 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/14 14:54:35 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 20:33:27 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	mlx_load_img(void *ptr, t_img *i, char *path)
+void	mlx_load_img(void *ptr, t_img *i, char *path, int *num)
 {
+	int	fd;
+
+	if (i && i->i)
+	{
+		if (num)
+			(*num)--;
+		mlx_destroy_image(ptr, i->i);
+		i->i = NULL;
+	}
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return ;
+	close(fd);
 	i->i = mlx_xpm_file_to_image(ptr, path, &i->width, &i->height);
 	i->addr = mlx_get_data_addr(i->i, &i->bpp, &i->line_len, &i->endian);
 }

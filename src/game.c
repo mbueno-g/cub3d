@@ -6,12 +6,11 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/14 22:33:22 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 16:37:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-#include <mlx.h>
 
 int	cub_key(int k, void *param)
 {
@@ -33,18 +32,10 @@ void	move_pl(int k, t_game *g, float ray_cos, float ray_sin)
 		angle = g->ray.angle + 90;
 	ray_cos = cos(degree_to_radians(angle)) * g->pl.speed;
 	ray_sin = sin(degree_to_radians(angle)) * g->pl.speed;
-	if ((int)(g->pl.y + ray_sin + 0.5) < g->height && (int)(g->pl.x + 0.5) < \
-		(int)ft_strlen(g->map[(int)(g->pl.y + ray_sin + 0.5)]))
-	{
-		if (g->map[(int)(g->pl.y + ray_sin + 0.5)][(int)(g->pl.x + 0.5)] != '1')
-			g->pl.y += ray_sin;
-	}
-	if ((int)(g->pl.y + 0.5) < g->height && (int)(g->pl.x + ray_cos + 0.5) < \
-		(int)ft_strlen(g->map[(int)(g->pl.y + 0.5)]))
-	{
-		if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + ray_cos + 0.5)] != '1')
-			g->pl.x += ray_cos;
-	}
+	if (g->map[(int)(g->pl.y + 0.5 + ray_sin)][(int)(g->pl.x + 0.5)] != '1')
+		g->pl.y += ray_sin;
+	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5 + ray_cos)] != '1')
+		g->pl.x += ray_cos;
 }
 
 int	cub_keydown(int k, void *param)
@@ -57,9 +48,9 @@ int	cub_keydown(int k, void *param)
 	ray_sin = 0;
 	g = param;
 	if (k == KEY_LEFT)
-		g->ray.angle -= 4;
+		g->ray.angle -= 5;
 	if (k == KEY_RIGHT)
-		g->ray.angle += 4;
+		g->ray.angle += 5;
 	if (k == KEY_W || k == KEY_A || k == KEY_S || k == KEY_D)
 		move_pl(k, g, ray_cos, ray_sin);
 	return (0);

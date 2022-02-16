@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/15 14:57:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:51:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 t_img	get_texture(t_game *g)
 {
-	if (g->x > (int)g->x && (int)g->y + 1 - g->y < 1)
-		return (g->tex.s);
-	if (g->x > (int)g->x)
+	if (g->x >= (int)g->x && g->x <= (int)g->x + 1 && \
+		g->y - (int)g->y < 0.01)
 		return (g->tex.n);
-	if (g->y > (int)g->y && (int)g->x + 1 - g->x < 1)
+	if (g->x >= (int)g->x && g->x <= (int)g->x + 1 && \
+		(int)g->y + 1 - g->y < 0.01)
+		return (g->tex.s);
+	if (g->y >= (int)g->y && g->y <= (int)g->y + 1 && \
+		g->x - (int)g->x < 0.01)
 		return (g->tex.w);
 	return (g->tex.e);
 }

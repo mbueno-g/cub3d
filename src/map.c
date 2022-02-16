@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 17:28:41 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:05:42 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	check_textures(char *trim, t_game *g)
 {
 	char	**dir;
 
-	mlx_load_img(g->mlx_ptr, &g->tex.b, "textures/black.xpm");
 	dir = ft_split(trim, ' ');
 	if (!dir)
 	{

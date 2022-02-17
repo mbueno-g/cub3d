@@ -6,11 +6,33 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 23:45:36 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 09:17:34 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	action_door(t_game *g)
+{
+	if (g->map[(int)g->pl.y][(int)g->pl.x] == 'c')
+		return ;
+	if (g->map[(int)g->pl.y - 1][(int)g->pl.x] == 'c')
+		g->map[(int)g->pl.y - 1][(int)g->pl.x] = 'o';
+	else if (g->map[(int)g->pl.y - 1][(int)g->pl.x] == 'o')
+		g->map[(int)g->pl.y - 1][(int)g->pl.x] = 'c';
+	if (g->map[(int)g->pl.y + 1][(int)g->pl.x] == 'c')
+		g->map[(int)g->pl.y + 1][(int)g->pl.x] = 'o';
+	else if (g->map[(int)g->pl.y + 1][(int)g->pl.x] == 'o')
+		g->map[(int)g->pl.y + 1][(int)g->pl.x] = 'c';
+	if (g->map[(int)g->pl.y][(int)g->pl.x - 1] == 'c')
+		g->map[(int)g->pl.y][(int)g->pl.x - 1] = 'o';
+	else if (g->map[(int)g->pl.y][(int)g->pl.x - 1] == 'o')
+		g->map[(int)g->pl.y][(int)g->pl.x - 1] = 'c';
+	if (g->map[(int)g->pl.y][(int)g->pl.x + 1] == 'c')
+		g->map[(int)g->pl.y][(int)g->pl.x + 1] = 'o';
+	else if (g->map[(int)g->pl.y][(int)g->pl.x + 1] == 'o')
+		g->map[(int)g->pl.y][(int)g->pl.x + 1] = 'c';
+}
 
 t_img	*mlx_load_img(void *ptr, char *path)
 {

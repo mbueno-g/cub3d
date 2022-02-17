@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 23:59:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 09:27:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,13 @@ int		checkcn(char *m, char c, int n0, int n1);
 /* Check every element of the map: spaces + characters */
 void	check_elements(t_game *g, int j);
 
+/* Draws 3D view on window-sized image */
+void	cub_draw(t_game *g, int ray_count, float dis);
+
 /* Checks which wall has been hit to choose proper texture */
 t_img	*get_texture(t_game *g);
+
+/* Checks player surroundings to open/close doors */
+void	action_door(t_game *g);
 
 #endif

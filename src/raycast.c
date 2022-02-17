@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:35:23 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/16 23:42:23 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 09:26:14 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
 	g->x = g->pl.x + 0.5;
 	g->y = g->pl.y + 0.5;
-	while (g->map[(int)g->y][(int)g->x] != '1' && \
+	while (!ft_strchr("1oc", g->map[(int)g->y][(int)g->x]) && \
 		sqrt(powf(g->x - g->pl.x - 0.5, 2.) + \
 		powf(g->y - g->pl.y - 0.5, 2.)) < g->ray.lim)
 	{
 		g->x += ray_cos;
 		g->y += ray_sin;
-		if (g->map[(int)g->y][(int)g->x] == '1')
+		if (ft_strchr("1oc", g->map[(int)g->y][(int)g->x]))
 			my_mlx_pixel_put(&g->minimap, g->x * SIZE, g->y * SIZE, 0x00FF0000);
 		else
 			my_mlx_pixel_put(&g->minimap, g->x * SIZE, g->y * SIZE, 0x00BDC1C6);
@@ -53,55 +53,6 @@ float	distance_to_wall(t_game *g, float ray_angle)
 	d = sqrt(powf(g->x - g->pl.x - 0.5, 2.) + powf(g->y - g->pl.y - 0.5, 2.));
 	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
 	return (d);
-}
-
-void	draw_texture(t_game *g, t_img *i, int ray_count, int wall_height)
-{
-	float	dy;
-	float	ds;
-	float	cy[2];
-	int		z;
-	int		color;
-
-	dy = ((float)wall_height * 2) / (float)i->height;
-	ds = ((float)WIN_H / 2) - (float)wall_height;
-	cy[1] = ds;
-	z = -1;
-	while (++z < i->height)
-	{
-		color = my_mlx_pixel_get(i, (int)(i->width * (g->x + g->y)) \
-			% i->width, z);
-		color = get_dist_color(color, ds);
-		cy[0] = cy[1];
-		while (cy[0] < cy[1] + dy)
-		{
-			if (cy[0] >= 0 && cy[0] < (float)WIN_H)
-				my_mlx_pixel_put(&g->win_img, ray_count, cy[0], color);
-			cy[0]++;
-		}
-		cy[1] += dy;
-	}
-}
-
-void	cub_draw(t_game *g, int ray_count, float dis)
-{
-	int		wall_height;
-	float	ds;
-	int		j;
-
-	wall_height = (int)(WIN_H / (1.5 * dis));
-	ds = ((float)WIN_H / 2) - (float)wall_height;
-	j = -1;
-	while (++j < WIN_H)
-	{
-		if (j < ds)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, \
-				get_dist_color(g->tex.ceiling, j));
-		else if (j >= (WIN_H / 2) + wall_height)
-			my_mlx_pixel_put(&g->win_img, ray_count, j, \
-				get_dist_color(g->tex.floor, WIN_H - j));
-	}
-	draw_texture(g, get_texture(g), ray_count, wall_height);
 }
 
 void	cub_raycast(t_game *g)

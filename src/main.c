@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 00:07:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 08:39:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	g = cub_init();
 	read_map(argv[1], &g);
+	g.tex.n_bak = g.tex.n;
+	g.tex.s_bak = g.tex.s;
+	g.tex.e_bak = g.tex.e;
+	g.tex.w_bak = g.tex.w;
 	check_map(&g);
 	game_init(&g);
 	return (0);

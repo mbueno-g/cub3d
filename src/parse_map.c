@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 19:20:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 08:41:28 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_characters(t_game *g, int i, int j)
 	}
 	else if (g->pl.dir && ft_strchr("NSWE", g->map[j][i]))
 		cub_perror(inv_player, g, NULL, 1);
-	else if (!ft_strchr("01", g->map[j][i]))
+	else if (!ft_strchr("01oc", g->map[j][i]))
 		cub_perror(inv_charac, g, NULL, 1);
 	if (j == g->height - 1 && !g->pl.dir)
 		cub_perror(inv_player, g, NULL, 1);

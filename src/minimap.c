@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/15 09:29:21 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 08:51:24 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,27 @@ void	cub_miniview(t_game *g)
 	}
 }
 
+int	get_mini_color(t_game *g, int len, int xy[2])
+{
+	int	color;
+
+	color = 0xFF000000;
+	if (xy[0] < len && ft_isspace(g->map[xy[1]][xy[0]]))
+		color = 0xFF000000;
+	else if (xy[0] < len && g->map[xy[1]][xy[0]] == 'c')
+		color = 0x00FF0000;
+	else if (xy[0] < len && g->map[xy[1]][xy[0]] == 'o')
+	color = 0x0000FF00;
+	else if (xy[0] < len && g->map[xy[1]][xy[0]] != '1')
+		color = 0x005E5C64;
+	else if (xy[0] < len)
+		color = 0x008BB5F8;
+	return (color);
+}
+
 void	cub_minimap(t_game *g)
 {
 	int	xy[2];
-	int	color;
 	int	len;
 
 	xy[1] = -1;
@@ -49,17 +66,8 @@ void	cub_minimap(t_game *g)
 		xy[0] = -1;
 		len = ft_strlen(g->map[xy[1]]);
 		while (++xy[0] < g->width)
-		{
-			color = 0xFF000000;
-			if (xy[0] < len && ft_isspace(g->map[xy[1]][xy[0]]))
-				color = 0xFF000000;
-			else if (xy[0] < len && g->map[xy[1]][xy[0]] != '1')
-				color = 0x005E5C64;
-			else if (xy[0] < len)
-				color = 0x008BB5F8;
 			my_mlx_area_put(&g->minimap, \
 				ft_newvector(xy[0] * SIZE, xy[1] * SIZE), \
-				ft_newvector(SIZE, SIZE), color);
-		}
+				ft_newvector(SIZE, SIZE), get_mini_color(g, len, xy));
 	}
 }

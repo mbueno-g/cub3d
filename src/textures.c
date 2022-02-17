@@ -6,11 +6,33 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:25:29 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 12:20:44 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:58:25 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+t_img	*get_texture(t_game *g)
+{
+	float	small;
+	t_img	*i;
+
+	small = 0.01;
+	i = g->tex.b;
+	if (g->y - (int)g->y < small && \
+			g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
+		i = g->tex.n->content;
+	else if ((int)g->y + 1 - g->y < small && \
+		g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
+		i = g->tex.s->content;
+	else if (g->x - (int)g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
+		i = g->tex.w->content;
+	else if ((int)g->x + 1 - g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
+		i = g->tex.e->content;
+	return (i);
+}
 
 int	get_tex_color(t_game *g, t_img *i, int z)
 {

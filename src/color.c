@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:43:33 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 11:54:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:48:35 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_dist_color(int color, float ds, int tr)
 
 	if (ds < 0)
 		ds = 0;
-	dif = powf(1.14, ds / 7);
+	dif = powf(1.14, ds / 7.5);
 	c = create_rgbt(color);
 	if (tr)
 		c.t -= dif;

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:13:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/14 22:59:40 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:53:29 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,5 @@ void	mlx_img_to_img(int p[2], t_img img[2], int c1)
 						xy[1] + p[1], color);
 			}
 		}
-	}
-}
-
-void	mlx_draw_vline(t_img img, int i, int j[2], int color)
-{
-	int	z;
-
-	z = j[0];
-	while (z < j[1])
-	{
-		my_mlx_pixel_put(&img, i, z, color);
-		z++;
 	}
 }

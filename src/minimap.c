@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 09:24:15 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 08:51:24 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:02:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	get_mini_color(t_game *g, int len, int xy[2])
 	else if (xy[0] < len && g->map[xy[1]][xy[0]] == 'c')
 		color = 0x00FF0000;
 	else if (xy[0] < len && g->map[xy[1]][xy[0]] == 'o')
-	color = 0x0000FF00;
+		color = 0x0000FF00;
 	else if (xy[0] < len && g->map[xy[1]][xy[0]] != '1')
 		color = 0x005E5C64;
 	else if (xy[0] < len)

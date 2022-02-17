@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 11:06:18 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 00:13:15 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:08:47 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	destroy_images(t_game *g)
 		mlx_destroy_image(g->mlx_ptr, g->tex.b->i);
 	if (g->win_img.i)
 		mlx_destroy_image(g->mlx_ptr, g->win_img.i);
+	if (g->win_w.i)
+		mlx_destroy_image(g->mlx_ptr, g->win_w.i);
 	if (g->scope->i)
 		mlx_destroy_image(g->mlx_ptr, g->scope->i);
 	if (g->win_ptr)

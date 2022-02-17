@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 12:25:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:07:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ void	init_sprites(t_game *g)
 	g->minimap.i = NULL;
 	g->miniview.i = NULL;
 	g->tex.n = NULL;
+	g->tex.n_bak = NULL;
 	g->tex.s = NULL;
+	g->tex.s_bak = NULL;
 	g->tex.e = NULL;
+	g->tex.e_bak = NULL;
 	g->tex.w = NULL;
+	g->tex.w_bak = NULL;
 	g->tex.b = mlx_load_img(g->mlx_ptr, "textures/black.xpm");
 	g->scope = mlx_load_img(g->mlx_ptr, "textures/scope.xpm");
 }
@@ -60,7 +64,7 @@ static t_game	cub_init(void)
 	g.pl.y = -1;
 	g.pl.speed = 0.2;
 	g.mouse_x = 0;
-	g.rate = 100;
+	g.rate = 200;
 	return (g);
 }
 
@@ -71,10 +75,6 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	g = cub_init();
 	read_map(argv[1], &g);
-	g.tex.n_bak = g.tex.n;
-	g.tex.s_bak = g.tex.s;
-	g.tex.e_bak = g.tex.e;
-	g.tex.w_bak = g.tex.w;
 	check_map(&g);
 	game_init(&g);
 	return (0);

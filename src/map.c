@@ -6,23 +6,30 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 08:37:10 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:09:11 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	get_anim(t_img *img, t_list **anim, int *num)
+t_list	*get_anim(t_img *img, t_list **anim, int *num)
 {
-	if (num && anim && img && *anim && ft_lstsize(*anim))
+	if (num && anim && *anim && img)
 		(*num)--;
+	if (!img)
+		return (*anim);
+	if (!img->i)
+	{
+		free(img);
+		return (*anim);
+	}
 	ft_lstadd_back(anim, ft_lstnew(img));
+	return (*anim);
 }
 
 void	check_textures(char *trim, t_game *g, int *num)
 {
 	char	**dir;
-	t_img	*i;
 
 	dir = ft_split(trim, ' ');
 	if (!dir)
@@ -30,16 +37,18 @@ void	check_textures(char *trim, t_game *g, int *num)
 		free(trim);
 		cub_perror(no_memory, g, NULL, 1);
 	}
-	if (ft_strncmp(dir[0], "F", 2) && ft_strncmp(dir[0], "C", 2))
-		i = mlx_load_img(g->mlx_ptr, dir[1]);
 	if (!ft_strncmp(dir[0], "NO", 3))
-		get_anim(i, &g->tex.n, num);
+		g->tex.n_bak = get_anim(mlx_load_img(g->mlx_ptr, dir[1]), \
+			&g->tex.n, num);
 	else if (!ft_strncmp(dir[0], "SO", 3))
-		get_anim(i, &g->tex.s, num);
+		g->tex.s_bak = get_anim(mlx_load_img(g->mlx_ptr, dir[1]), \
+			&g->tex.s, num);
 	else if (!ft_strncmp(dir[0], "EA", 3))
-		get_anim(i, &g->tex.e, num);
+		g->tex.e_bak = get_anim(mlx_load_img(g->mlx_ptr, dir[1]), \
+			&g->tex.e, num);
 	else if (!ft_strncmp(dir[0], "WE", 3))
-		get_anim(i, &g->tex.w, num);
+		g->tex.w_bak = get_anim(mlx_load_img(g->mlx_ptr, dir[1]), \
+			&g->tex.w, num);
 	else if (!ft_strncmp(dir[0], "F", 2) || !ft_strncmp(dir[0], "C", 2))
 		get_cf_color(dir, g);
 	ft_free_matrix(&dir);

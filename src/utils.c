@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 12:48:34 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:02:04 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_img	*mlx_load_img(void *ptr, char *path)
 
 	i = malloc(sizeof(t_img));
 	i->i = NULL;
+	if (!path || ft_strrncmp(path, ".xpm", 4))
+		return (i);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (i);

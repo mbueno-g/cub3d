@@ -1,7 +1,15 @@
-NO textures/wall.xpm
-SO textures/wall.xpm
-WE textures/wall.xpm
-EA textures/wall.xpm
+NO textures/torch/torch1_wall.xpm
+NO textures/torch/torch2_wall.xpm
+NO textures/torch/torch3_wall.xpm
+SO textures/torch/torch1_wall.xpm
+SO textures/torch/torch2_wall.xpm
+SO textures/torch/torch3_wall.xpm
+WE textures/torch/torch1_wall.xpm
+WE textures/torch/torch2_wall.xpm
+WE textures/torch/torch3_wall.xpm
+EA textures/torch/torch1_wall.xpm
+EA textures/torch/torch2_wall.xpm
+EA textures/torch/torch3_wall.xpm
 
 F 184,113,39
 C 51,198,227

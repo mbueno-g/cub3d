@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 19:36:51 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:51:42 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	read_map(char *file, t_game *g)
 			check_textures(line[1], g, &num);
 		else if ((line[1] && line[1][0]) || num >= 7)
 			g->map = ft_extend_matrix(g->map, line[1]);
+		if ((int)ft_strlen(line[1]) > g->width)
+			g->width = ft_strlen(line[1]);
 		free(line[1]);
 	}
 	cub_perror(empty_file, g, NULL, !num);
@@ -90,8 +92,6 @@ void	check_map(t_game *g)
 	j = -1;
 	while (++j < g->height)
 	{
-		if ((int)ft_strlen(g->map[j]) > g->width)
-			g->width = ft_strlen(g->map[j]);
 		w = ft_strlen(g->map[j]) - 1;
 		i = 0;
 		while (ft_isspace(g->map[j][i]) && i <= w)
@@ -105,7 +105,7 @@ void	check_map(t_game *g)
 			cub_perror(inv_wall, g, NULL, 1);
 		else if (g->map[j][i] != '1' || g->map[j][w] != '1')
 			cub_perror(inv_wall, g, NULL, 1);
-		check_elements(g, j);
 	}
+	check_elements(g);
 	cub_perror(inv_map, g, NULL, !j);
 }

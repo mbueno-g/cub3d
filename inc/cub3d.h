@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 12:25:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:53:56 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ int		cub_update(void *param);
 int		checkcn(char *m, char c, int n0, int n1);
 
 /* Check every element of the map: spaces + characters */
-void	check_elements(t_game *g, int j);
+void	check_elements(t_game *g);
 
 /* Draws 3D view on window-sized image */
 void	cub_draw(t_game *g, int ray_count, float dis);

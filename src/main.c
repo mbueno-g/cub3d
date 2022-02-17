@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 08:39:20 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:25:20 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	check_file(int argc, char **argv)
 void	init_sprites(t_game *g)
 {
 	g->win_img.i = NULL;
+	g->win_w.i = NULL;
 	g->minimap.i = NULL;
 	g->miniview.i = NULL;
 	g->tex.n = NULL;
@@ -57,8 +58,7 @@ static t_game	cub_init(void)
 	g.tex.ceiling = -1;
 	g.pl.x = -1;
 	g.pl.y = -1;
-	g.pl.speed = 0.12;
-	g.ray.lim = 10;
+	g.pl.speed = 0.2;
 	g.mouse_x = 0;
 	g.rate = 100;
 	return (g);

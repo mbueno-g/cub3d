@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 09:14:00 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:53:23 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	cub_mouse(int x, int y, void *param)
 
 	g = param;
 	if (x > g->mouse_x && y != -1)
-		g->ray.angle += 2;
+		g->ray.angle += 5;
 	else if (x < g->mouse_x && y != -1)
-		g->ray.angle -= 2;
+		g->ray.angle -= 5;
 	g->mouse_x = x;
 	return (0);
 }
@@ -76,6 +76,14 @@ int	cub_mouse(int x, int y, void *param)
 void	game_init(t_game *g)
 {
 	g->win_ptr = mlx_new_window(g->mlx_ptr, WIN_W, WIN_H, ":)");
+	g->win_img.i = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
+	g->win_img.addr = mlx_get_data_addr(g->win_img.i, &g->win_img.bpp, \
+		&g->win_img.line_len, &g->win_img.endian);
+	g->win_w.i = mlx_new_image(g->mlx_ptr, WIN_W, WIN_H);
+	g->win_w.addr = mlx_get_data_addr(g->win_w.i, &g->win_w.bpp, \
+		&g->win_w.line_len, &g->win_w.endian);
+	my_mlx_area_put(&g->win_w, ft_newvector(0, 0), \
+		ft_newvector(WIN_W, WIN_H), 0x00BDC1C6);
 	g->minimap.i = mlx_new_image(g->mlx_ptr, g->width * SIZE, \
 		g->height * SIZE);
 	g->minimap.addr = mlx_get_data_addr(g->minimap.i, &g->minimap.bpp, \

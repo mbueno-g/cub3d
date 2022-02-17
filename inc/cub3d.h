@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 09:27:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:25:00 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		win_img;
+	t_img		win_w;
 	t_img		minimap;
 	t_img		miniview;
 	t_img		*scope;
@@ -145,7 +146,7 @@ int		cub_atoi(const char *nptr, short *nbr);
 void	get_cf_color(char **dir, t_game *g);
 
 /* Drecreases RGB value of color as object gets further */
-int		get_dist_color(int color, float ds);
+int		get_dist_color(int color, float ds, int tr);
 
 /* Frees all necessary things before exiting */
 void	cub_end(t_game *g);

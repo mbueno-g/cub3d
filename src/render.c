@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 00:11:02 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:07:01 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ t_img	*get_texture(t_game *g)
 	float	small;
 	t_img	*i;
 
-	small = 0.004;
+	small = 0.02;
 	i = g->tex.b;
-	if (g->y - (int)g->y < small)
+	if (g->y - (int)g->y < small && \
+			g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
 		i = g->tex.n->content;
-	else if ((int)g->y + 1 - g->y < small)
+	else if ((int)g->y + 1 - g->y < small && \
+		g->x > (int)g->x + small && g->x < (int)g->x + 1 - small)
 		i = g->tex.s->content;
-	else if (g->x - (int)g->x < small)
+	else if (g->x - (int)g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
 		i = g->tex.w->content;
-	else if ((int)g->x + 1 - g->x < small)
+	else if ((int)g->x + 1 - g->x < small && \
+		g->y > (int)g->y + small && g->y < (int)g->y + 1 - small)
 		i = g->tex.e->content;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:43:33 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/16 22:35:25 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:54:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,22 @@ void	get_cf_color(char **dir, t_game *g)
 		g->tex.ceiling = create_trgb(aux);
 }
 
-int	get_dist_color(int color, float ds)
+int	get_dist_color(int color, float ds, int tr)
 {
 	t_color	c;
+	float	dif;
 
 	if (ds < 0)
 		ds = 0;
+	dif = powf(1.14, ds / 7);
 	c = create_rgbt(color);
-	c.t -= ds / 1.6;
-	c.r -= ds / 1.6;
-	c.g -= ds / 1.6;
-	c.b -= ds / 1.6;
+	if (tr)
+		c.t -= dif;
+	else
+		c.t = 256;
+	c.r -= dif;
+	c.g -= dif;
+	c.b -= dif;
 	if (c. t < 0)
 		c.t = 0;
 	if (c.r < 0)

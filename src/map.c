@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 16:09:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:36:51 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,3 @@ void	check_map(t_game *g)
 	}
 	cub_perror(inv_map, g, NULL, !j);
 }
-//problemas: espacios al final de la lines + tabulaciones en vez de espacios + 

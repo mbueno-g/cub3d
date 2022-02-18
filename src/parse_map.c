@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 20:21:58 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/18 23:23:18 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ char	**copy_map(t_game *g)
 	int		i;
 	int		j;
 
-	aux = malloc(sizeof(char *) * g->height);
+	aux = malloc(sizeof(char *) * (g->height + 1));
 	j = -1;
 	while (++j < g->height)
 	{
+		aux[j] = malloc(sizeof(char) * (g->width + 1));
 		i = -1;
-		aux[j] = malloc(sizeof(char) * g->width);
 		while (++i < g->width)
 		{
 			if (i >= (int)ft_strlen(g->map[j]))
@@ -73,7 +73,9 @@ char	**copy_map(t_game *g)
 			else
 				aux[j][i] = g->map[j][i];
 		}
+		aux[j][i] = '\0';
 	}
+	aux[j] = NULL;
 	return (aux);
 }
 

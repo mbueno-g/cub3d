@@ -5,11 +5,13 @@
 🚧 WIP: Magic under development 🚧
 
 
-https://user-images.githubusercontent.com/40824677/154301479-97113991-c81e-421e-b5cd-987046773b12.mp4
+https://user-images.githubusercontent.com/40824677/154804165-7442a99a-7ed7-4cb7-adba-fdb2f8569da8.mp4
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/153962176-0c2539c4-0c43-4a2e-9797-c67310eb6ce5.gif">
-</p>
+
+
+https://user-images.githubusercontent.com/40824677/154804001-30971bd4-a867-456f-b6d5-ba144d3449ee.mp4
+
+
 
 <!--
 

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 16:07:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:53:53 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static t_game	cub_init(void)
 	g.pl.y = -1;
 	g.pl.speed = 0.2;
 	g.mouse_x = 0;
-	g.rate = 200;
+	g.neg = -1;
+	g.rate = 100;
 	return (g);
 }
 
@@ -75,6 +76,9 @@ int	main(int argc, char **argv)
 	check_file(argc, argv);
 	g = cub_init();
 	read_map(argv[1], &g);
+	cub_perror(inv_tex, &g, NULL, !g.tex.n || !g.tex.s || !g.tex.e || \
+		!g.tex.w);
+	cub_perror(inv_color, &g, NULL, g.tex.floor == -1 || g.tex.ceiling == -1);
 	check_map(&g);
 	game_init(&g);
 	return (0);

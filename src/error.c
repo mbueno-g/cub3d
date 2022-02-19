@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 13:10:05 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/08 12:32:17 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:16:17 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cub_perror(t_cub_err err, t_game *g, char *param, int c)
 	write(2, "error opening file: ", 20 * (err == inv_file));
 	write(2, "file is empty\n", 14 * (err == empty_file));
 	write(2, "devide out of memory\n", 21 * (err == no_memory));
-	write(2, "invalid color: ", 15 * (err == inv_color));
+	write(2, "invalid color\n", 15 * (err == inv_color));
 	write(2, "map not surrounded by walls\n", 28 * (err == inv_wall));
 	write(2, "invalid map\n", 12 * (err == inv_map));
 	write(2, "invalid character\n", 18 * (err == inv_charac));

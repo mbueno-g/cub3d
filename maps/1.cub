@@ -1,7 +1,4 @@
-NO textures/Pac-Man/pac_open_left.xpm
-NO textures/Pac-Man/pac_semi_left.xpm
-NO textures/Pac-Man/pac_closed.xpm
-NO textures/Pac-Man/pac_semi_left.xpm
+NO textures/wall_1.xpm
 SO textures/wall_2.xpm
 WE textures/wall_3.xpm
 EA textures/wall_4.xpm

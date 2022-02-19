@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:18:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/09 13:19:11 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:50:25 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@
 
 # ifndef KEY_RIGHT
 #  define KEY_RIGHT 124
+# endif
+
+# ifndef KEY_SPACE
+#  define KEY_SPACE 124
 # endif
 
 #endif

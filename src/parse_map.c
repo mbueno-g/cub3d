@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/18 23:23:18 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:25:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	check_characters(t_game *g, char **map, int i, int j)
 		cub_perror(inv_player, g, NULL, 1);
 }
 
-char	**copy_map(t_game *g)
+char	**square_map(t_game *g)
 {
 	char	**aux;
 	int		i;
@@ -85,7 +85,9 @@ void	check_elements(t_game *g)
 	int		j;
 	char	**aux;
 
-	aux = copy_map(g);
+	aux = square_map(g);
+	ft_free_matrix(&g->map);
+	g->map = aux;
 	j = -1;
 	while (++j < g->height)
 	{
@@ -98,5 +100,4 @@ void	check_elements(t_game *g)
 				check_characters(g, aux, i, j);
 		}
 	}
-	ft_free_matrix(&aux);
 }

@@ -11,8 +11,8 @@ EA textures/torch/torch1_wall_3.xpm
 EA textures/torch/torch2_wall_3.xpm
 EA textures/torch/torch3_wall_3.xpm
 
-F 184,113,39
-C 51,198,227
+F 150,75,0
+C 41,117,119
 
          11111111111111111111111111111
          10000000001100000000000000001

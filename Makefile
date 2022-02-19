@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/17 09:26:31 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/02/19 14:19:50 by aperez-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SHELL=/bin/bash
 UNAME = $(shell uname -s)
 
 # Properties for MacOS
-CDEBUG = -g3 -fsanitize=address
+CDEBUG = #-g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
 END = end_mac.c
 ifeq ($(UNAME), Linux)
@@ -56,6 +56,7 @@ ifeq ($(UNAME), Linux)
 	D = KEY_D=100
 	UP = KEY_UP=65362
 	DOWN = KEY_DOWN=65364
+	SPACE = KEY_SPACE=32
 	LEFT = KEY_LEFT=65361
 	RIGHT = KEY_RIGHT=65363
 	R = KEY_R=114
@@ -85,12 +86,13 @@ SZ=SIZE=10
 WIN_SIZE = -D $(WW) -D $(WH) -D $(SZ)
 
 # Keycodes defined during compilation
-KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
+KEYCODES =  -D $(ESC) -D $(Q) -D $(R) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT) -D $(SPACE)
 
 SRC = main.c map.c error.c color.c	\
 	  minimap.c raycast.c render.c	\
 	  utils.c game.c my_mlx.c		\
-	  parse_map.c textures.c $(END)
+	  parse_map.c textures.c 		\
+	  player.c $(END)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

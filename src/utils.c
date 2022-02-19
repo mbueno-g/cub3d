@@ -6,34 +6,11 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 17:00:10 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/17 16:02:04 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:58:36 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	action_door(t_game *g)
-{
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5)] == 'c')
-		return ;
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_w.i, 0, 0);
-	if (g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] == 'c')
-		g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] == 'o')
-		g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] == 'c')
-		g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] == 'o')
-		g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] == 'c')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] == 'o')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] == 'c')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] == 'o')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] = 'c';
-}
 
 t_img	*mlx_load_img(void *ptr, char *path)
 {
@@ -53,10 +30,10 @@ t_img	*mlx_load_img(void *ptr, char *path)
 	return (i);
 }
 
-int	cub_atoi(const char *nptr, short *nbr)
+int	cub_atoi(const char *nptr, long *nbr)
 {
 	*nbr = 0;
-	if (!ft_isdigit(*nptr))
+	if (!nptr || !ft_isdigit(*nptr))
 		return (-1);
 	while (ft_isdigit(*nptr))
 	{

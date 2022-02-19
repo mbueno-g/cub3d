@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 16:54:56 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:54:37 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ int	cub_update(void *param)
 	t_game	*g;
 
 	g = param;
-	if (!(g->nframes % g->rate) || g->ray.angle != g->ray.oldangle || \
-		g->pl.oldx != g->pl.x || g->pl.oldy != g->pl.y)
+	if (!(g->nframes % g->rate))
 	{
-		update_anim(g);
-		g->ray.oldangle = g->ray.angle;
-		g->pl.oldx = g->pl.x;
-		g->pl.oldy = g->pl.y;
+		if (!(g->nframes % (2 * g->rate)))
+			update_anim(g);
 		cub_minimap(g);
 		cub_raycast(g);
 		cub_miniview(g);
@@ -59,6 +56,8 @@ int	cub_update(void *param)
 			WIN_H / 2 - g->scope->height / 2);
 		redraw_elem(g, g->miniview, WIN_W - g->miniview.width - 20, \
 			WIN_H - g->miniview.height - 20);
+		if (g->neg == 1)
+			cub_invert_color(g);
 		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_img.i, 0, 0);
 	}
 	g->nframes++;

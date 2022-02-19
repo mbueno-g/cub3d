@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/17 19:53:56 by mbueno-g         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:59:45 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef enum e_cub_err
 /* Struct to handle rgb colors with transparency */
 typedef struct s_color
 {
-	short	t;
-	short	r;
-	short	g;
-	short	b;
+	long	t;
+	long	r;
+	long	g;
+	long	b;
 }				t_color;
 
 /* Every image corresponding to a wall texture, plus floor and ceiling */
@@ -83,8 +83,6 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
-	float	oldx;
-	float	oldy;
 	char	dir;
 	float	speed;
 }				t_player;
@@ -94,7 +92,6 @@ typedef struct s_ray
 {
 	float	incre_angle;
 	float	angle;
-	float	oldangle;
 	float	hfov;
 	float	lim;
 	int		precision;
@@ -109,6 +106,7 @@ typedef struct s_game
 	int			width;
 	int			mouse_x;
 	int			rate;
+	int			neg;
 	long		nframes;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -140,7 +138,7 @@ void	cub_usage(int errno);
 int		cub_exit(void *param);
 
 /* Atoi for colors (more restrictive than original) */
-int		cub_atoi(const char *nptr, short *nbr);
+int		cub_atoi(const char *nptr, long *nbr);
 
 /* Fills color int for floor and ceiling */
 void	get_cf_color(char **dir, t_game *g);
@@ -187,7 +185,13 @@ void	cub_draw(t_game *g, int ray_count, float dis);
 /* Checks which wall has been hit to choose proper texture */
 t_img	*get_texture(t_game *g);
 
+/* Moves player depending on which key was pressed */
+void	move_pl(int k, t_game *g, float ray_cos, float ray_sin);
+
 /* Checks player surroundings to open/close doors */
 void	action_door(t_game *g);
+
+/* Inverts color of window-sized image */
+void	cub_invert_color(t_game *g);
 
 #endif

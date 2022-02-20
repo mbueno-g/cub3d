@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 12:19:25 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/19 12:25:58 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:44:38 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,17 @@ void	check_elements(t_game *g)
 {
 	int		i;
 	int		j;
-	char	**aux;
 
-	aux = square_map(g);
-	ft_free_matrix(&g->map);
-	g->map = aux;
 	j = -1;
 	while (++j < g->height)
 	{
 		i = -1;
 		while (++i < g->width)
 		{
-			if (aux[j][i] == ' ')
-				check_walls(g, aux, i, j);
+			if (g->map[j][i] == ' ')
+				check_walls(g, g->map, i, j);
 			else
-				check_characters(g, aux, i, j);
+				check_characters(g, g->map, i, j);
 		}
 	}
 }

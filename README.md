@@ -4,14 +4,17 @@
 
 🚧 WIP: Magic under development 🚧
 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/154857349-93ba911d-39b1-452e-a027-1237c97518ba.gif">
+</p>
 
-https://user-images.githubusercontent.com/40824677/154804165-7442a99a-7ed7-4cb7-adba-fdb2f8569da8.mp4
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/154857398-332e4ebc-9793-4ff4-bbb8-fa3de5f82880.gif">
+</p>
 
-
-
-https://user-images.githubusercontent.com/40824677/154804001-30971bd4-a867-456f-b6d5-ba144d3449ee.mp4
-
-
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/154857378-54aa9625-7938-41d6-8771-249b7a8dbe0a.gif">
+</p>
 
 <!--
 

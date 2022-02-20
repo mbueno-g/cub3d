@@ -16,7 +16,7 @@
     <img src="https://user-images.githubusercontent.com/40824677/154857378-54aa9625-7938-41d6-8771-249b7a8dbe0a.gif">
 </p>
 
-
+<!--
 
 :books: [Introduction](#introduction)
 
@@ -40,7 +40,7 @@ The logic behind RayCasting is to throw rays in the direction of the player view
     <img width="233" alt="Screenshot 2022-02-15 at 22 58 00" src="https://user-images.githubusercontent.com/71781441/154159164-667da898-a8d5-4991-a8d0-a6008f111054.png">
 </p>
     
-To find the wall the ray hits, we can use the following algorithm. 
+To calculate the **distance between the player and the nearest wall**, we can use the following algorithm:
 1. Initialize some basic attributes needed for the projection: 
 
 <table align="center">
@@ -50,8 +50,8 @@ To find the wall the ray hits, we can use the following algorithm.
         <th> Value </th>
     </tr>
     <tr align="center">
-        <td>HFOV </td>
-        <td> The field of view of the player</td>
+        <td>FOV </td>
+        <td> The field of view of the player <img width="150" align="center" alt="Screenshot 2022-02-20 at 22 17 46" src="https://user-images.githubusercontent.com/71781441/154864710-baee6726-6f2a-4f37-8125-97a5cf52c4f7.png"></td>
         <td> 30º </td>
     </tr>
     <tr align="center">
@@ -74,13 +74,23 @@ To find the wall the ray hits, we can use the following algorithm.
         <td> Limit of the distance the player can view </td>
         <td> 11</td>
     </tr>
+    <tr align="center">
+        <td>Player's position</td>
+        <td> Center of the square where the player is </td>
+        <td> pl.x += 0.5 ; pl.y += 0.5 </td>
+    </tr>
 </table>
 
-2. From the center of the square the player is in, we move the ray forward incrementing the x's and y's coordinates of the ray.
+
+2. From the the player's position, we move the ray forward incrementing the x's and y's coordinates of the ray.
+
+<img align="right" width="333" alt="Screenshot 2022-02-20 at 22 35 23" src="https://user-images.githubusercontent.com/71781441/154865310-1b8dc0c5-0def-416f-adb6-7acf2a01c53a.png">
+
 ```c
 ray.x += ray_cos;
 ray.y += ray_sin;
 ```
+
 where `ray_cos` and `ray_sin` are of the form:
 ```c
 ray_cos = cos(degree_to_radians(ray_angle)) / g->ray.precision;
@@ -89,11 +99,23 @@ ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
 
 3. Repeat step 2 until we reach the limit or we hit a wall.
 
+4. Calculate the distance between the player's and the ray's position using the euclidean distance:
+```c
+distance = sqrt(powf(x - pl.x - 0.5, 2.) + powf(y - pl.y - 0.5, 2.));
+```
 
+5. Fix fisheye
+```c
+distance = distance * cos(degree_to_radians(ray_angle - g->ray.angle))
+```
 
-<img width="333" alt="Screenshot 2022-02-20 at 22 35 23" src="https://user-images.githubusercontent.com/71781441/154865310-1b8dc0c5-0def-416f-adb6-7acf2a01c53a.png">
+This algorith is repeated window_width times, i.e. in every iteration we increment the angle until we have been through all the field of view. 
+This distance is really helpful to calculate the height of the wall height:
+```c
+wall_height = (window_height / (1.5 * distance));
+```
+-->
 
-<img width="300" alt="Screenshot 2022-02-20 at 22 17 46" src="https://user-images.githubusercontent.com/71781441/154864710-baee6726-6f2a-4f37-8125-97a5cf52c4f7.png">
 
 
 

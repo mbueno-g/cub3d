@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/20 17:23:05 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:09:58 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	cub_update(void *param)
 	{
 		if (!(g->nframes % (2 * g->rate)))
 			update_anim(g);
+		if (!(g->nframes % (10 * g->rate)))
+			g->pl.door_cooldown = 0;
 		check_move(g);
 		cub_minimap(g);
 		cub_raycast(g);

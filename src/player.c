@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 12:11:54 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/20 18:05:15 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:08:27 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,19 @@ void	action_door(t_game *g)
 	float	x;
 	float	y;
 
-	if (ft_strchr("oc", g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5)]))
+	if (g->pl.door_cooldown || \
+			ft_strchr("oc", g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5)]))
 		return ;
 	d = distance_to_door(g, g->ray.angle, &x, &y);
 	if (d < g->ray.lim && g->map[(int)y][(int)x] == 'c')
 	{
+		g->pl.door_cooldown = 1;
 		g->map[(int)y][(int)x] = 'o';
 		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_g.i, 0, 0);
 	}
 	else if (d < g->ray.lim && g->map[(int)y][(int)x] == 'o')
 	{
+		g->pl.door_cooldown = 1;
 		g->map[(int)y][(int)x] = 'c';
 		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_r.i, 0, 0);
 	}

@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/20 18:21:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:06:18 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_player
 	float	y;
 	char	dir;
 	float	speed;
+	int		door_cooldown;
 	t_key	keys;
 }				t_player;
 

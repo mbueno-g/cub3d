@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:25:42 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/19 13:59:45 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:21:31 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 
 # include "../libft/inc/libft.h"
 # include "keycodes.h"
-# include "../get_next_line/get_next_line.h"
-
 # include <mlx.h>
+# include "get_next_line.h"
 # include "my_mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -78,6 +77,17 @@ typedef struct s_tex
 	int		ceiling;
 }				t_tex;
 
+/* Struct to check when keys are pressed */
+typedef struct s_key
+{
+	int	w_pressed;
+	int	a_pressed;
+	int	s_pressed;
+	int	d_pressed;
+	int	left_pressed;
+	int	right_pressed;
+}				t_key;
+
 /* Struct to store various attributes of our player */
 typedef struct s_player
 {
@@ -85,6 +95,7 @@ typedef struct s_player
 	float	y;
 	char	dir;
 	float	speed;
+	t_key	keys;
 }				t_player;
 
 /* Struct to store all ray-casting-related data */
@@ -111,7 +122,8 @@ typedef struct s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		win_img;
-	t_img		win_w;
+	t_img		win_g;
+	t_img		win_r;
 	t_img		minimap;
 	t_img		miniview;
 	t_img		*scope;
@@ -127,6 +139,9 @@ void	check_map(t_game *g);
 
 /* Reads file with gnl */
 void	read_map(char *file, t_game *g);
+
+/* Retrieves next line from a given fd */
+char	*get_next_line(int fd);
 
 /* Prints appropriate error message and exits, freeing everything */
 int		cub_perror(t_cub_err err, t_game *g, char *param, int c);
@@ -193,5 +208,8 @@ void	action_door(t_game *g);
 
 /* Inverts color of window-sized image */
 void	cub_invert_color(t_game *g);
+
+/* Adds spaces to end of all lines to ensure all lines have the same width */
+char	**square_map(t_game *g);
 
 #endif

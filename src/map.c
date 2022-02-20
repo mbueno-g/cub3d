@@ -6,7 +6,7 @@
 /*   By: mbueno-g <mbueno-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 12:05:52 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/19 13:40:13 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:27:30 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ void	check_map(t_game *g)
 			cub_perror(inv_map, g, NULL, 1);
 		if ((j == 0 || j == g->height - 1) && ft_strlen(g->map[j]) - \
 			ft_countchar(g->map[j], ' ') - ft_countchar(g->map[j], '1'))
-			cub_perror(inv_wall, g, NULL, 1);
-		else if (g->map[j][i] != '1' || g->map[j][w] != '1')
 			cub_perror(inv_wall, g, NULL, 1);
 	}
 	check_elements(g);

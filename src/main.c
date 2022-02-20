@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:24:16 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/19 13:53:53 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:21:40 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	check_file(int argc, char **argv)
 void	init_sprites(t_game *g)
 {
 	g->win_img.i = NULL;
-	g->win_w.i = NULL;
+	g->win_g.i = NULL;
+	g->win_r.i = NULL;
 	g->minimap.i = NULL;
 	g->miniview.i = NULL;
 	g->tex.n = NULL;
@@ -62,16 +63,18 @@ static t_game	cub_init(void)
 	g.tex.ceiling = -1;
 	g.pl.x = -1;
 	g.pl.y = -1;
-	g.pl.speed = 0.2;
+	g.pl.speed = 0.15;
+	ft_bzero(&g.pl.keys, sizeof(t_key));
 	g.mouse_x = 0;
 	g.neg = -1;
-	g.rate = 100;
+	g.rate = 50;
 	return (g);
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	g;
+	char	**aux;
 
 	check_file(argc, argv);
 	g = cub_init();
@@ -79,6 +82,9 @@ int	main(int argc, char **argv)
 	cub_perror(inv_tex, &g, NULL, !g.tex.n || !g.tex.s || !g.tex.e || \
 		!g.tex.w);
 	cub_perror(inv_color, &g, NULL, g.tex.floor == -1 || g.tex.ceiling == -1);
+	aux = square_map(&g);
+	ft_free_matrix(&g.map);
+	g.map = aux;
 	check_map(&g);
 	game_init(&g);
 	return (0);

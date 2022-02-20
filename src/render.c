@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:01:06 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/19 13:54:37 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 17:23:05 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ void	update_anim(t_game *g)
 		g->tex.w = g->tex.w_bak;
 }
 
+void	check_move(t_game *g)
+{
+	if (g->pl.keys.left_pressed)
+		g->ray.angle -= 3;
+	if (g->pl.keys.right_pressed)
+		g->ray.angle += 3;
+	if (g->pl.keys.w_pressed)
+		move_pl(KEY_W, g, 0, 0);
+	if (g->pl.keys.a_pressed)
+		move_pl(KEY_A, g, 0, 0);
+	if (g->pl.keys.s_pressed)
+		move_pl(KEY_S, g, 0, 0);
+	if (g->pl.keys.d_pressed)
+		move_pl(KEY_D, g, 0, 0);
+}
+
 int	cub_update(void *param)
 {
 	t_game	*g;
@@ -49,6 +65,7 @@ int	cub_update(void *param)
 	{
 		if (!(g->nframes % (2 * g->rate)))
 			update_anim(g);
+		check_move(g);
 		cub_minimap(g);
 		cub_raycast(g);
 		cub_miniview(g);

@@ -6,11 +6,33 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 12:11:54 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/19 12:12:31 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/20 18:05:15 by aperez-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+float	distance_to_door(t_game *g, float ray_angle, float *x, float *y)
+{
+	float	d;
+	float	ray_cos;
+	float	ray_sin;
+
+	ray_cos = cos(degree_to_radians(ray_angle)) / g->ray.precision;
+	ray_sin = sin(degree_to_radians(ray_angle)) / g->ray.precision;
+	*x = g->pl.x + 0.5;
+	*y = g->pl.y + 0.5;
+	while (!ft_strchr("1oc", g->map[(int)*y][(int)*x]) && \
+		sqrt(powf(*x - g->pl.x - 0.5, 2.) + \
+		powf(*y - g->pl.y - 0.5, 2.)) < g->ray.lim)
+	{
+		*x += ray_cos;
+		*y += ray_sin;
+	}
+	d = sqrt(powf(*x - g->pl.x - 0.5, 2.) + powf(*y - g->pl.y - 0.5, 2.));
+	d = d * cos(degree_to_radians(ray_angle - g->ray.angle));
+	return (d);
+}
 
 void	move_pl(int k, t_game *g, float ray_cos, float ray_sin)
 {
@@ -35,23 +57,21 @@ void	move_pl(int k, t_game *g, float ray_cos, float ray_sin)
 
 void	action_door(t_game *g)
 {
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5)] == 'c')
+	float	d;
+	float	x;
+	float	y;
+
+	if (ft_strchr("oc", g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5)]))
 		return ;
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_w.i, 0, 0);
-	if (g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] == 'c')
-		g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] == 'o')
-		g->map[(int)(g->pl.y + 0.5) - 1][(int)(g->pl.x + 0.5)] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] == 'c')
-		g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] == 'o')
-		g->map[(int)(g->pl.y + 0.5) + 1][(int)(g->pl.x + 0.5)] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] == 'c')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] == 'o')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) - 1] = 'c';
-	if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] == 'c')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] = 'o';
-	else if (g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] == 'o')
-		g->map[(int)(g->pl.y + 0.5)][(int)(g->pl.x + 0.5) + 1] = 'c';
+	d = distance_to_door(g, g->ray.angle, &x, &y);
+	if (d < g->ray.lim && g->map[(int)y][(int)x] == 'c')
+	{
+		g->map[(int)y][(int)x] = 'o';
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_g.i, 0, 0);
+	}
+	else if (d < g->ray.lim && g->map[(int)y][(int)x] == 'o')
+	{
+		g->map[(int)y][(int)x] = 'c';
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->win_r.i, 0, 0);
+	}
 }

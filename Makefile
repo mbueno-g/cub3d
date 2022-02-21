@@ -6,7 +6,7 @@
 #    By: aperez-b <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 16:44:37 by aperez-b          #+#    #+#              #
-#    Updated: 2022/02/20 17:35:12 by aperez-b         ###   ########.fr        #
+#    Updated: 2022/02/21 15:43:16 by mbueno-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,13 @@ UNAME = $(shell uname -s)
 # Properties for MacOS
 CDEBUG = #-g3 -fsanitize=address
 LMLX = -lmlx -framework OpenGL -framework AppKit
+OS_X = OSX=1
 END = end_mac.c
 ifeq ($(UNAME), Linux)
 	# Properties for Linux
 	LEAKS = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes -s -q 
 	LMLX = -lmlx -lXext -lX11 -lm
+	OS_X =
 	END = end_linux.c
 	CDEBUG = #-g3
 endif
@@ -54,7 +56,7 @@ HEIGHT=720
 WW=WIN_W=$(WIDTH)
 WH=WIN_H=$(HEIGHT)
 SZ=SIZE=10
-WIN_SIZE = -D $(WW) -D $(WH) -D $(SZ)
+WIN_SIZE = -D $(WW) -D $(WH) -D $(SZ) -D $(OS_X)
 
 SRC_GNL = get_next_line.c get_next_line_utils.c
 

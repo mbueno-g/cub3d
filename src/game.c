@@ -6,7 +6,7 @@
 /*   By: mbueno-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:51:15 by mbueno-g          #+#    #+#             */
-/*   Updated: 2022/02/20 18:07:22 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/21 16:51:59 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,8 @@ int	cub_keydown(int k, t_game *g)
 
 int	cub_mouse(int x, int y, t_game *g)
 {
-	if (x > g->mouse_x && y != -1)
-		g->ray.angle += 1;
-	else if (x < g->mouse_x && y != -1)
-		g->ray.angle -= 1;
+	if (y != -1)
+		g->ray.angle += (x - g->mouse_x) / 3;
 	g->mouse_x = x;
 	return (0);
 }

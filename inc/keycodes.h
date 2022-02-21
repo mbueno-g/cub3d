@@ -6,7 +6,7 @@
 /*   By: aperez-b <aperez-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:18:26 by aperez-b          #+#    #+#             */
-/*   Updated: 2022/02/20 18:29:14 by aperez-b         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:41:00 by mbueno-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
 # else
-#  ifndef LINUX
-#   define LINUX
-#  endif
 #  define KEY_W 119
 #  define KEY_S 115
 #  define KEY_A 97

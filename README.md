@@ -1,20 +1,9 @@
 # cub3d
 
-*My first raycaster with MiniLibX 💡*
+*My first RayCaster with miniLibX 💡*
 
-🚧 WIP: Magic under development 🚧
+🚧 README Magic under development 🚧
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/154857349-93ba911d-39b1-452e-a027-1237c97518ba.gif">
-</p>
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/154857398-332e4ebc-9793-4ff4-bbb8-fa3de5f82880.gif">
-</p>
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/40824677/154857378-54aa9625-7938-41d6-8771-249b7a8dbe0a.gif">
-</p>
 
 <!--
 
@@ -116,11 +105,37 @@ wall_height = (window_height / (1.5 * distance));
 ```
 -->
 
+## Demos
+
+Here are a few samples of how our maps look
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/155116913-80e549a9-1080-4eaf-bf44-0c0940998119.gif">
+</p>
+
+- ``1.cub``
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/155116616-824e5a4e-7dc2-4e6b-8d00-5d22e57d7c2c.gif">
+</p>
+
+- ``2.cub``
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/155116751-58a1f0d4-8500-480d-bf47-c93073933fbb.gif">
+</p>
+
+- ``pac.cub``
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/155117235-bd8e392a-d856-4201-9f56-13a72f7ef3ca.gif">
+- </p>
 
 
+- ``pac2.cub``
 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/40824677/155117526-38191be8-94d7-43e5-bca0-aca7a0efeb00.gif">
+</p>
 
-
-
-
-
+To check some of our favorite layouts, see [MAPS.md](https://github.com/mbueno-g/cub3d/blob/main/maps/MAPS.md)

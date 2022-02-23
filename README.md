@@ -129,7 +129,7 @@ Here are a few samples of how our maps look
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155117235-bd8e392a-d856-4201-9f56-13a72f7ef3ca.gif">
-- </p>
+</p>
 
 
 - ``pac2.cub``

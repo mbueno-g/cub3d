@@ -18,7 +18,7 @@ A small set of screenshots of our favorite maps
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155118483-486ba090-2b59-4a45-a5c5-17f08dd20b94.png">
-- </p>
+</p>
 
 
 - ``pac2.cub``
@@ -31,22 +31,22 @@ A small set of screenshots of our favorite maps
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155118479-995a1d08-0356-48cd-971e-0c133aabbd96.png">
-- </p>
+</p>
 
 - ``min.cub``
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155118481-813bd667-184c-4c3d-9244-8fead4748e4a.png">
-- </p>
+</p>
 
 - ``pr.cub``
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155118486-71b6e982-2933-4e05-b7d7-c3bfa298f550.png">
-- </p>
+</p>
 
 - ``space.cub``
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/40824677/155118488-669c42b2-3f4b-4a32-bac1-c1b363aad187.png">
-- </p>
+</p>

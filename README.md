@@ -8,7 +8,7 @@
 
 :rainbow: [Textures](#textures)
 
-
+:fire: [Bonus](#bonus)
 
 :joystick: [Time to play](#time-to-play)
 
@@ -67,6 +67,8 @@ C 51,198,227
 - [x] The `W`, `A`, `S` and `D` keys move up, down, left and right the player's point of view.
 - [x] The `left` and `right` arrow keys rotate the field of view of the player. 
 - [x] Pressing `ESC` or the red cross on the window's frame must close the window and quit the program cleanly. 
+
+Additionally for the bonus part, if you press the `E` key in front of a door you can open or close it.
 
 
 ## New concept
@@ -168,6 +170,24 @@ Once we know the wall height and all the colors, we have everything we need to d
 - Ceiling: from screen top to screen half height minus wall height
 - Wall: from half height minus wall height to half height plus wall height
 - Floor: from half height plus wall height to screen botton
+
+## Bonus 
+
+- [x] Wall collisions
+Once the player come accross a wall, instead of stopping in front of it, the player can move in the `x` or `y` direction.
+
+- [x] Minimap
+As the name says, the minimap is a small 2D map of the maze that shows the players' path on the map.
+
+- [x] Doors  
+The doors appear in the map as a `c` for a close door and a `o` for an open door. If a ray in the field of view of the player hits a door, you can open or close it pressing `E` key. 
+
+- [x] Animations
+Our animated sprites are the walls. In order to do that, we read multiple textures path in the file and we save them in a linked list. Iterating over the list, the wall textures is changed for the next one. 
+
+- [x] Rotation with mouse  
+There is an event on the `minilibx` library that tell us the position of the mouse. If the position changes, the field of view of the players changes accordingly. 
+
 
 
 ## Time to play

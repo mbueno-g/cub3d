@@ -1,21 +1,63 @@
 # cub3d
 
-*My first RayCaster with miniLibX 💡*
-
-🚧 README Magic under development 🚧
-
-
-<!--
-
 :books: [Introduction](#introduction)
 
-:collision: [New concept](#new-concept): Render + Raycasting
+:mega: [Parsing](#parsing)
+
+:collision: [New concept](#new-concept): Raycasting
+
+:joystick: [Time to play](#time-to-play)
 
 
 ## Introduction
 
 The aim of the cub3D proyect is to create a 3D game using the raycasting technique which is a rendering method implemented in the world-famous Wolfenstein 3D game.
 This was a group proyect and I had the honor to repeat with @madebypixel02 :)
+
+
+## Parsing
+
+This 3D game must follow the following rules:
+
+#### Files rules
+- [x] The executable cub3D must receive at least one argument, a map.
+- [x] The map is a .cub file
+- [x] The first few lines must contain a direction, written as `NO`,`SO`,`WE`,`EA`, followed by a path to an .xpm image. If one of these directions appears more than once, the image or texture is updated if the new path is valid. 
+- [x] After the textures and an empty line,  the RGB color for the floor and ceiling is shown as `F` or `C` followed by the RGB coordinates separated by commas.
+- [x] Finally, the map is display.
+
+#### Maps rules
+- [x] These are the possible characters: ` ` (empty), `0` (floor), `1` (wall) and `N`,`S`, `W`, `E` (player's view direction). Additionally, for the bonus we have `c` (close door) and `o` (open door).
+- [x] The map must be surrounded by walls, even the empty spaces.
+
+So a valid map would be seen as this one:
+
+```
+NO textures/wall_1.xpm
+NO textures/wall_1.xpm
+SO textures/wall_2.xpm
+WE textures/wall_3.xpm
+EA textures/wall_3.xpm
+
+F 255,113,39
+C 51,198,227
+
+11111111111111111111111111111
+11111111110000000000000000011111
+        10110000011100000000000111111
+        100000000110000011111111111
+11111111111111011100000010001
+11111111000001111100000010001
+       1000001 100000001100011111111
+    11110000111101000N00000011111
+11111111111111111111111111111
+
+11111111111111111111111111111
+10000000111100010000000001001
+100000001  100110101110000001
+10000000111110000001 10100001
+11111111111111111111 11111111
+```
 
 
 ## New concept
@@ -103,9 +145,10 @@ This distance is really helpful to calculate the height of the wall height:
 ```c
 wall_height = (window_height / (1.5 * distance));
 ```
--->
 
-## Demos
+
+
+## Time to play
 
 Here are a few samples of how our maps look
 

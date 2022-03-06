@@ -2,11 +2,13 @@
 
 :books: [Introduction](#introduction)
 
-:mega: [Parsing](#parsing)
+:mega: [Rules](#rules)
 
 :collision: [New concept](#new-concept): Raycasting
 
 :rainbow: [Textures](#textures)
+
+
 
 :joystick: [Time to play](#time-to-play)
 
@@ -17,7 +19,7 @@ The aim of the cub3D proyect is to create a 3D game using the raycasting techniq
 This was a group proyect and I had the honor to repeat with @madebypixel02 :)
 
 
-## Parsing
+## Rules
 
 This 3D game must follow the following rules:
 
@@ -60,6 +62,11 @@ C 51,198,227
 10000000111110000001 10100001
 11111111111111111111 11111111
 ```
+
+#### Game rules
+- [x] The `W`, `A`, `S` and `D` keys move up, down, left and right the player's point of view.
+- [x] The `left` and `right` arrow keys rotate the field of view of the player. 
+- [x] Pressing `ESC` or the red cross on the window's frame must close the window and quit the program cleanly. 
 
 
 ## New concept
@@ -150,13 +157,17 @@ wall_height = (window_height / (1.5 * distance));
 
 ## Textures
 
-Once we know the wall height we have everything we need to draw the ceiling, the wall and the floor.
+One last thing we need to do is to read pixels `(x,y)` from a texture image `i` to get the colors of the wall. 
 
+```c
+x = (int)(i->width * (g->x + g->y)) % i->width;
+// y = image height
+color = my_mlx_pixel_get(i, x, y);
+```
+Once we know the wall height and all the colors, we have everything we need to draw the ceiling, the wall and the floor.
 - Ceiling: from screen top to screen half height minus wall height
 - Wall: from half height minus wall height to half height plus wall height
 - Floor: from half height plus wall height to screen botton
-
-To actually draw it we need the colors. We already have the ceiling and the floor's colors. 
 
 
 ## Time to play

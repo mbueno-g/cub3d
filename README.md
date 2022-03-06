@@ -6,6 +6,8 @@
 
 :collision: [New concept](#new-concept): Raycasting
 
+:rainbow: [Textures](#textures)
+
 :joystick: [Time to play](#time-to-play)
 
 
@@ -146,6 +148,15 @@ This distance is really helpful to calculate the height of the wall height:
 wall_height = (window_height / (1.5 * distance));
 ```
 
+## Textures
+
+Once we know the wall height we have everything we need to draw the ceiling, the wall and the floor.
+
+- Ceiling: from screen top to screen half height minus wall height
+- Wall: from half height minus wall height to half height plus wall height
+- Floor: from half height plus wall height to screen botton
+
+To actually draw it we need the colors. We already have the ceiling and the floor's colors. 
 
 
 ## Time to play
